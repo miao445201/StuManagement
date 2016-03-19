@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  StuManagement
 //
 //  Created by fitfun on 16/3/19.
 //  Copyright © 2016年 miao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseMenuViewController.h"
 
-@interface ViewController : UIViewController
-
+@interface RootViewController : BaseMenuViewController
 
 @end
-

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "RootViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +17,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//设置窗口
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    RootViewController *rootVC = [[RootViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    self.window.rootViewController = nav;//进入的首个页面
+    
+    //设置控制器为Window的根控制器
+    [self.window makeKeyAndVisible];//显示
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
