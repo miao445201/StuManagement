@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
 		9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */; };
 		9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */; };
 		9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StuManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9116D2B61C9D090F00D80A50 /* StuMan-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StuMan-pch.pch"; sourceTree = "<group>"; };
 		9116D2B71C9D094600D80A50 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9116D2B81C9D0A2600D80A50 /* BaseMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenuViewController.h; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		91EAA4B11C9D06A400DE1307 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91EAA4B41C9D06A400DE1307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91EAA4B61C9D06A400DE1307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5BB0E3BB0953FBED8BA0D2A /* Pods-StuManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StuManagement.release.xcconfig"; path = "Pods/Target Support Files/Pods-StuManagement/Pods-StuManagement.release.xcconfig"; sourceTree = "<group>"; };
+		F16F4AC761EBBFE78D322032 /* Pods-StuManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StuManagement.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StuManagement/Pods-StuManagement.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +150,8 @@
 			children = (
 				91EAA4A41C9D06A400DE1307 /* StuManagement */,
 				91EAA4A31C9D06A400DE1307 /* Products */,
+				C9BF580AC0A0E5465914C040 /* Pods */,
+				C440ACF2938AC5CEDB4DD7DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,6 +190,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C440ACF2938AC5CEDB4DD7DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9BF580AC0A0E5465914C040 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F16F4AC761EBBFE78D322032 /* Pods-StuManagement.debug.xcconfig */,
+				D5BB0E3BB0953FBED8BA0D2A /* Pods-StuManagement.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,9 +214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91EAA4B91C9D06A400DE1307 /* Build configuration list for PBXNativeTarget "StuManagement" */;
 			buildPhases = (
+				339D1C2CE643E71750720A16 /* Check Pods Manifest.lock */,
 				91EAA49E1C9D06A400DE1307 /* Sources */,
 				91EAA49F1C9D06A400DE1307 /* Frameworks */,
 				91EAA4A01C9D06A400DE1307 /* Resources */,
+				325E6D4052B7AF286A5C903B /* Embed Pods Frameworks */,
+				0AC958985798FED6D0DF55C9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,6 +280,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0AC958985798FED6D0DF55C9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StuManagement/Pods-StuManagement-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		325E6D4052B7AF286A5C903B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StuManagement/Pods-StuManagement-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		339D1C2CE643E71750720A16 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		91EAA49E1C9D06A400DE1307 /* Sources */ = {
@@ -365,6 +440,7 @@
 		};
 		91EAA4BA1C9D06A400DE1307 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F16F4AC761EBBFE78D322032 /* Pods-StuManagement.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/StuManagement/StuMan-pch.pch";
@@ -378,6 +454,7 @@
 		};
 		91EAA4BB1C9D06A400DE1307 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5BB0E3BB0953FBED8BA0D2A /* Pods-StuManagement.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/StuManagement/StuMan-pch.pch";
