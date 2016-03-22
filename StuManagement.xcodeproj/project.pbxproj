@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
+		6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F564B1CA1779A00E27D12 /* LoginViewController.m */; };
 		9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */; };
 		9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */; };
 		9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D0F564A1CA1779A00E27D12 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6D0F564B1CA1779A00E27D12 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StuManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9116D2B61C9D090F00D80A50 /* StuMan-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StuMan-pch.pch"; sourceTree = "<group>"; };
 		9116D2B71C9D094600D80A50 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -64,6 +67,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D0F56451CA1778400E27D12 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				6D0F564A1CA1779A00E27D12 /* LoginViewController.h */,
+				6D0F564B1CA1779A00E27D12 /* LoginViewController.m */,
+			);
+			name = "登录";
+			path = "StuManagement/登录";
+			sourceTree = SOURCE_ROOT;
+		};
+		6D0F56461CA1778400E27D12 /* 活动 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "活动";
+			path = "StuManagement/活动";
+			sourceTree = SOURCE_ROOT;
+		};
+		6D0F56471CA1778400E27D12 /* 社团 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "社团";
+			path = "StuManagement/社团";
+			sourceTree = SOURCE_ROOT;
+		};
+		6D0F56481CA1778400E27D12 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "我的";
+			path = "StuManagement/我的";
+			sourceTree = SOURCE_ROOT;
+		};
+		6D0F56491CA1778400E27D12 /* 新闻 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "新闻";
+			path = "StuManagement/新闻";
+			sourceTree = SOURCE_ROOT;
+		};
 		9116D2B21C9D07D600D80A50 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,11 +139,11 @@
 				9116D2BE1C9D0A3D00D80A50 /* RootViewController.h */,
 				9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */,
 				9116D2C01C9D0A3D00D80A50 /* RootViewController.xib */,
-				9116D2CF1C9D0AF200D80A50 /* 登录 */,
-				9116D2D21C9D0AFD00D80A50 /* 社团 */,
-				9116D2D11C9D0AFB00D80A50 /* 活动 */,
-				9116D2D31C9D0B1D00D80A50 /* 新闻 */,
-				9116D2D01C9D0AF900D80A50 /* 我的 */,
+				6D0F56451CA1778400E27D12 /* 登录 */,
+				6D0F56461CA1778400E27D12 /* 活动 */,
+				6D0F56471CA1778400E27D12 /* 社团 */,
+				6D0F56481CA1778400E27D12 /* 我的 */,
+				6D0F56491CA1778400E27D12 /* 新闻 */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -108,41 +153,6 @@
 			children = (
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		9116D2CF1C9D0AF200D80A50 /* 登录 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "登录";
-			sourceTree = "<group>";
-		};
-		9116D2D01C9D0AF900D80A50 /* 我的 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "我的";
-			sourceTree = "<group>";
-		};
-		9116D2D11C9D0AFB00D80A50 /* 活动 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "活动";
-			sourceTree = "<group>";
-		};
-		9116D2D21C9D0AFD00D80A50 /* 社团 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "社团";
-			sourceTree = "<group>";
-		};
-		9116D2D31C9D0B1D00D80A50 /* 新闻 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "新闻";
 			sourceTree = "<group>";
 		};
 		91EAA4991C9D06A400DE1307 = {
@@ -336,6 +346,7 @@
 			files = (
 				9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */,
 				9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */,
+				6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */,
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
 				91EAA4A71C9D06A400DE1307 /* main.m in Sources */,
 				9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */,

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 
+#import "LoginViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -19,11 +21,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//设置窗口
     self.window.backgroundColor = [UIColor whiteColor];
-    
-    RootViewController *rootVC = [[RootViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
-    self.window.rootViewController = nav;//进入的首个页面
-    
+
+    LoginViewController *rvc = [[LoginViewController alloc] init];
+    self.window.rootViewController = rvc;
+//    RootViewController *rootVC = [[RootViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
+//    self.window.rootViewController = nav;//进入的首个页面
+
     //设置控制器为Window的根控制器
     [self.window makeKeyAndVisible];//显示
     return YES;
