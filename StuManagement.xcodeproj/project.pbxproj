@@ -12,7 +12,6 @@
 		9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */; };
 		9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */; };
 		9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */; };
-		9116D2C21C9D0A3D00D80A50 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C01C9D0A3D00D80A50 /* RootViewController.xib */; };
 		9116D2C91C9D0AAF00D80A50 /* Button_circle_checked_32px.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C31C9D0AAF00D80A50 /* Button_circle_checked_32px.png */; };
 		9116D2CA1C9D0AAF00D80A50 /* Circle_32px.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C41C9D0AAF00D80A50 /* Circle_32px.png */; };
 		9116D2CB1C9D0AAF00D80A50 /* icon_header_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C51C9D0AAF00D80A50 /* icon_header_back@2x.png */; };
@@ -37,7 +36,6 @@
 		9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		9116D2BE1C9D0A3D00D80A50 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		9116D2C01C9D0A3D00D80A50 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		9116D2C31C9D0AAF00D80A50 /* Button_circle_checked_32px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_circle_checked_32px.png; sourceTree = "<group>"; };
 		9116D2C41C9D0AAF00D80A50 /* Circle_32px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle_32px.png; sourceTree = "<group>"; };
 		9116D2C51C9D0AAF00D80A50 /* icon_header_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_header_back@2x.png"; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */,
 				9116D2BE1C9D0A3D00D80A50 /* RootViewController.h */,
 				9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */,
-				9116D2C01C9D0A3D00D80A50 /* RootViewController.xib */,
 				6D0F56451CA1778400E27D12 /* 登录 */,
 				6D0F56461CA1778400E27D12 /* 活动 */,
 				6D0F56471CA1778400E27D12 /* 社团 */,
@@ -281,7 +278,6 @@
 				91EAA4B51C9D06A400DE1307 /* LaunchScreen.storyboard in Resources */,
 				9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */,
 				91EAA4B21C9D06A400DE1307 /* Assets.xcassets in Resources */,
-				9116D2C21C9D0A3D00D80A50 /* RootViewController.xib in Resources */,
 				9116D2CC1C9D0AAF00D80A50 /* icon_header_back@3x.png in Resources */,
 				9116D2CA1C9D0AAF00D80A50 /* Circle_32px.png in Resources */,
 				9116D2CD1C9D0AAF00D80A50 /* line_hon_1px_up.png in Resources */,
