@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
 		6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F564B1CA1779A00E27D12 /* LoginViewController.m */; };
+		6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */; };
+		6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */; };
+		6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */; };
+		6DC4B4C91CA3E7B1006FB4EC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */; };
 		9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */; };
 		9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */; };
 		9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */; };
@@ -27,6 +31,11 @@
 /* Begin PBXFileReference section */
 		6D0F564A1CA1779A00E27D12 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6D0F564B1CA1779A00E27D12 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRollScrollView.h; sourceTree = "<group>"; };
+		6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRollScrollView.m; sourceTree = "<group>"; };
+		6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StuManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9116D2B61C9D090F00D80A50 /* StuMan-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StuMan-pch.pch"; sourceTree = "<group>"; };
 		9116D2B71C9D094600D80A50 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -107,6 +116,15 @@
 			path = "StuManagement/新闻";
 			sourceTree = SOURCE_ROOT;
 		};
+		6DC4B4C01CA3D305006FB4EC /* 类 */ = {
+			isa = PBXGroup;
+			children = (
+				6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */,
+				6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */,
+			);
+			path = "类";
+			sourceTree = "<group>";
+		};
 		9116D2B21C9D07D600D80A50 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +194,11 @@
 				91EAA4A81C9D06A400DE1307 /* AppDelegate.h */,
 				91EAA4A91C9D06A400DE1307 /* AppDelegate.m */,
 				9116D2B71C9D094600D80A50 /* Constant.h */,
+				6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */,
+				6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */,
+				6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */,
 				9116D2B41C9D07F000D80A50 /* VC */,
+				6DC4B4C01CA3D305006FB4EC /* 类 */,
 				9116D2B21C9D07D600D80A50 /* Model */,
 				9116D2B31C9D07E600D80A50 /* Resources */,
 				9116D2B51C9D07F700D80A50 /* Libraries */,
@@ -275,8 +297,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9116D2C91C9D0AAF00D80A50 /* Button_circle_checked_32px.png in Resources */,
+				6DC4B4C91CA3E7B1006FB4EC /* 3.jpg in Resources */,
+				6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */,
 				91EAA4B51C9D06A400DE1307 /* LaunchScreen.storyboard in Resources */,
 				9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */,
+				6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */,
 				91EAA4B21C9D06A400DE1307 /* Assets.xcassets in Resources */,
 				9116D2CC1C9D0AAF00D80A50 /* icon_header_back@3x.png in Resources */,
 				9116D2CA1C9D0AAF00D80A50 /* Circle_32px.png in Resources */,
@@ -345,6 +370,7 @@
 				6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */,
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
 				91EAA4A71C9D06A400DE1307 /* main.m in Sources */,
+				6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */,
 				9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
