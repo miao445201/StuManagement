@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
 		6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F564B1CA1779A00E27D12 /* LoginViewController.m */; };
+		6D29C38A1CA50F8F0031B908 /* OrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3891CA50F8F0031B908 /* OrganizationViewController.m */; };
+		6D29C38D1CA510DC0031B908 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C38C1CA510DC0031B908 /* ActivityViewController.m */; };
+		6D29C3901CA511740031B908 /* SpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C38F1CA511740031B908 /* SpotlightViewController.m */; };
+		6D29C3931CA512060031B908 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3921CA512060031B908 /* MineViewController.m */; };
+		6D29C3961CA513F70031B908 /* MIYBasisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3951CA513F70031B908 /* MIYBasisViewController.m */; };
+		6D29C39C1CA5224A0031B908 /* MIYTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C39B1CA5224A0031B908 /* MIYTableView.m */; };
+		6D29C39F1CA526B80031B908 /* OrganizationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C39E1CA526B80031B908 /* OrganizationTableViewCell.m */; };
+		6D29C3A21CA52D140031B908 /* MIYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3A11CA52D140031B908 /* MIYTableViewController.m */; };
 		6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */; };
 		6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */; };
 		6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */; };
@@ -31,6 +39,22 @@
 /* Begin PBXFileReference section */
 		6D0F564A1CA1779A00E27D12 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6D0F564B1CA1779A00E27D12 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6D29C3881CA50F8F0031B908 /* OrganizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationViewController.h; sourceTree = "<group>"; };
+		6D29C3891CA50F8F0031B908 /* OrganizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationViewController.m; sourceTree = "<group>"; };
+		6D29C38B1CA510DC0031B908 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		6D29C38C1CA510DC0031B908 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		6D29C38E1CA511740031B908 /* SpotlightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightViewController.h; sourceTree = "<group>"; };
+		6D29C38F1CA511740031B908 /* SpotlightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightViewController.m; sourceTree = "<group>"; };
+		6D29C3911CA512060031B908 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		6D29C3921CA512060031B908 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		6D29C3941CA513F70031B908 /* MIYBasisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIYBasisViewController.h; sourceTree = "<group>"; };
+		6D29C3951CA513F70031B908 /* MIYBasisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIYBasisViewController.m; sourceTree = "<group>"; };
+		6D29C39A1CA5224A0031B908 /* MIYTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIYTableView.h; sourceTree = "<group>"; };
+		6D29C39B1CA5224A0031B908 /* MIYTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIYTableView.m; sourceTree = "<group>"; };
+		6D29C39D1CA526B80031B908 /* OrganizationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationTableViewCell.h; sourceTree = "<group>"; };
+		6D29C39E1CA526B80031B908 /* OrganizationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationTableViewCell.m; sourceTree = "<group>"; };
+		6D29C3A01CA52D140031B908 /* MIYTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIYTableViewController.h; sourceTree = "<group>"; };
+		6D29C3A11CA52D140031B908 /* MIYTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIYTableViewController.m; sourceTree = "<group>"; };
 		6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRollScrollView.h; sourceTree = "<group>"; };
 		6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRollScrollView.m; sourceTree = "<group>"; };
 		6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -87,6 +111,8 @@
 		6D0F56461CA1778400E27D12 /* 活动 */ = {
 			isa = PBXGroup;
 			children = (
+				6D29C38B1CA510DC0031B908 /* ActivityViewController.h */,
+				6D29C38C1CA510DC0031B908 /* ActivityViewController.m */,
 			);
 			name = "活动";
 			path = "StuManagement/活动";
@@ -95,6 +121,10 @@
 		6D0F56471CA1778400E27D12 /* 社团 */ = {
 			isa = PBXGroup;
 			children = (
+				6D29C3881CA50F8F0031B908 /* OrganizationViewController.h */,
+				6D29C3891CA50F8F0031B908 /* OrganizationViewController.m */,
+				6D29C39D1CA526B80031B908 /* OrganizationTableViewCell.h */,
+				6D29C39E1CA526B80031B908 /* OrganizationTableViewCell.m */,
 			);
 			name = "社团";
 			path = "StuManagement/社团";
@@ -103,6 +133,8 @@
 		6D0F56481CA1778400E27D12 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				6D29C3911CA512060031B908 /* MineViewController.h */,
+				6D29C3921CA512060031B908 /* MineViewController.m */,
 			);
 			name = "我的";
 			path = "StuManagement/我的";
@@ -111,6 +143,8 @@
 		6D0F56491CA1778400E27D12 /* 新闻 */ = {
 			isa = PBXGroup;
 			children = (
+				6D29C38E1CA511740031B908 /* SpotlightViewController.h */,
+				6D29C38F1CA511740031B908 /* SpotlightViewController.m */,
 			);
 			name = "新闻";
 			path = "StuManagement/新闻";
@@ -121,6 +155,10 @@
 			children = (
 				6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */,
 				6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */,
+				6D29C39A1CA5224A0031B908 /* MIYTableView.h */,
+				6D29C39B1CA5224A0031B908 /* MIYTableView.m */,
+				6D29C3A01CA52D140031B908 /* MIYTableViewController.h */,
+				6D29C3A11CA52D140031B908 /* MIYTableViewController.m */,
 			);
 			path = "类";
 			sourceTree = "<group>";
@@ -152,6 +190,8 @@
 				9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */,
 				9116D2BA1C9D0A2600D80A50 /* BaseViewController.h */,
 				9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */,
+				6D29C3941CA513F70031B908 /* MIYBasisViewController.h */,
+				6D29C3951CA513F70031B908 /* MIYBasisViewController.m */,
 				9116D2BE1C9D0A3D00D80A50 /* RootViewController.h */,
 				9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */,
 				6D0F56451CA1778400E27D12 /* 登录 */,
@@ -365,13 +405,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D29C39F1CA526B80031B908 /* OrganizationTableViewCell.m in Sources */,
 				9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */,
 				9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */,
 				6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */,
+				6D29C38A1CA50F8F0031B908 /* OrganizationViewController.m in Sources */,
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
+				6D29C3931CA512060031B908 /* MineViewController.m in Sources */,
 				91EAA4A71C9D06A400DE1307 /* main.m in Sources */,
+				6D29C3961CA513F70031B908 /* MIYBasisViewController.m in Sources */,
 				6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */,
+				6D29C3A21CA52D140031B908 /* MIYTableViewController.m in Sources */,
+				6D29C3901CA511740031B908 /* SpotlightViewController.m in Sources */,
+				6D29C38D1CA510DC0031B908 /* ActivityViewController.m in Sources */,
 				9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */,
+				6D29C39C1CA5224A0031B908 /* MIYTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

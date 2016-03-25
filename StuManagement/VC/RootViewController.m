@@ -8,6 +8,10 @@
 
 #import "RootViewController.h"
 #import "ImageRollScrollView.h"
+#import "ActivityViewController.h"
+#import "OrganizationViewController.h"
+#import "SpotlightViewController.h"
+#import "MineViewController.h"
 
 @interface RootViewController () <UIScrollViewDelegate> {
     UIScrollView *customScrollView;
@@ -22,15 +26,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDate *now = [NSDate date];
-        NSDateComponents *comps = [[NSDateComponents alloc] init];
-        NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
-        NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-        comps = [calendar components:unitFlags fromDate:now];
-        NSDictionary *weekDict = @{ @1:@"星期天", @2:@"星期一", @3:@"星期二", @4:@"星期三", @5:@"星期四", @6:@"星期五", @7:@"星期六" };
         
-        self.navigationItem.title = [NSString stringWithFormat:@"%ld月%ld日 %@", (long)[comps month], (long)[comps day], weekDict[[NSNumber numberWithInteger:[comps weekday]]]];
     }
     return self;
 }
@@ -39,7 +35,9 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.barTintColor = [UIColor orangeColor];
+    [self setNavigationTitle];
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     [self initSubViews];
 //    [self testScrollView];
@@ -56,44 +54,67 @@
 
 }
 
+- (void)setNavigationTitle
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *now = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
+    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    comps = [calendar components:unitFlags fromDate:now];
+    NSDictionary *weekDict = @{ @1:@"星期天", @2:@"星期一", @3:@"星期二", @4:@"星期三", @5:@"星期四", @6:@"星期五", @7:@"星期六" };
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld月%ld日 %@", (long)[comps month], (long)[comps day], weekDict[[NSNumber numberWithInteger:[comps weekday]]]];
+}
+
 - (void)initSubViews
 {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     [self.view addSubview:scrollView];
-    scrollView.backgroundColor = [UIColor clearColor];
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
         make.width.equalTo(self.view);
     }];
  
     ImageRollScrollView *imageRollView = [[ImageRollScrollView alloc] init];
-    [scrollView addSubview:imageRollView];
     
     UIButton *activity = [[UIButton alloc] init];
-    [scrollView addSubview:activity];
     activity.backgroundColor = [UIColor redColor];
     
     UIButton *organization = [[UIButton alloc] init];
-    [scrollView addSubview:organization];
     organization.backgroundColor = [UIColor orangeColor];
-
+    
     UIButton *spotlight = [[UIButton alloc] init];
-    [scrollView addSubview:spotlight];
     spotlight.backgroundColor = [UIColor yellowColor];
 
     UIButton *weather = [[UIButton alloc] init];
-    [scrollView addSubview:weather];
     weather.backgroundColor = [UIColor greenColor];
 
-    UIButton *user = [[UIButton alloc] init];
-    [scrollView addSubview:user];
-    user.backgroundColor = [UIColor blueColor];
+    UIButton *mine = [[UIButton alloc] init];
+    mine.backgroundColor = [UIColor blueColor];
     
-    NSArray *array = @[imageRollView, activity, organization, spotlight, weather, user];
+    NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
     for (UIButton *button in array) {
         [self makeView:button toRoundCorner:8];
     }
     
+    [scrollView addSubview:imageRollView];
+    [scrollView addSubview:activity];
+    [scrollView addSubview:organization];
+    [scrollView addSubview:spotlight];
+    [scrollView addSubview:weather];
+    [scrollView addSubview:mine];
+
+    activity.tag = 1;
+    organization.tag = 2;
+    spotlight.tag = 3;
+    mine.tag = 4;
+    
+    [activity addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
+    [organization addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
+    [spotlight addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
+    [mine addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
+
     
     //layout
     NSInteger gap = 10;
@@ -134,7 +155,7 @@
         make.height.equalTo(weather.width);
     }];
     
-    [user makeConstraints:^(MASConstraintMaker *make) {
+    [mine makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(spotlight.bottom).offset(gap);
         make.left.equalTo(gap);
         make.right.equalTo(-gap);
@@ -142,7 +163,7 @@
     }];
     
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(user.bottom).offset(gap).priorityLow();
+        make.bottom.equalTo(mine.bottom).offset(gap).priorityLow();
         make.bottom.greaterThanOrEqualTo(self.view);
     }];
     
@@ -152,7 +173,29 @@
     NSArray *images = @[image1, image2, image3];
     NSArray *texts = @[@"我说今晚月亮好美", @"你说是的", @"写台词送给男生签名照"];
     
-    [imageRollView loadImages:images withRollTime:3 optionalText:texts];
+    [imageRollView loadImages:images withRollTime:5 optionalText:texts andContentMode:nil];
+}
+
+- (void)pushToViewController:(UIButton *)sender
+{
+    UIViewController *controller = nil;
+    switch (sender.tag) {
+        case 1:
+            controller = [[ActivityViewController alloc] init];
+            break;
+        case 2:
+            controller = [[OrganizationViewController alloc] init];
+            break;
+        case 3:
+            controller = [[SpotlightViewController alloc] init];
+            break;
+        case 4:
+            controller = [[MineViewController alloc] init];
+            break;
+        default:
+            break;
+    }
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius
@@ -161,11 +204,6 @@
     view.layer.cornerRadius = radius;
 }
 
-/*
- http://g.hiphotos.baidu.com/image/h%3D200/sign=5f57c95eda54564efa65e33983de9cde/38dbb6fd5266d0161f276b65902bd40735fa3544.jpg
- http://img2.imgtn.bdimg.com/it/u=836165302,2546919370&fm=21&gp=0.jpg
- http://img3.imgtn.bdimg.com/it/u=197157313,1549247420&fm=21&gp=0.jpg
- */
 - (UIImage *)imageFromURLString:(NSString *)urlstring
 {
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlstring]]];

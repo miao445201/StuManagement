@@ -6,8 +6,8 @@
 //  Copyright © 2016年 miao. All rights reserved.
 //
 
-#import "BaseMenuViewController.h"
+#import "MIYBasisViewController.h"
 
-@interface RootViewController : BaseMenuViewController
+@interface RootViewController : MIYBasisViewController
 
 @end

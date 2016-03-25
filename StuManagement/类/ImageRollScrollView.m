@@ -32,7 +32,7 @@
     return self;
 }
 
-- (void)loadImages:(NSArray *)images withRollTime:(NSTimeInterval)time optionalText:(NSArray *)texts
+- (void)loadImages:(NSArray *)images withRollTime:(NSTimeInterval)time optionalText:(NSArray *)texts andContentMode:(UIViewContentMode *)contentMode
 {
     [self initSubViewsWithText:(texts != nil)];
     
@@ -65,7 +65,9 @@
     for (int i = 0; i < realImages.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:realImages[i]];
         [self.scrollView addSubview:imageView];
-
+        if (contentMode) {
+            imageView.contentMode = *contentMode;
+        }
         [imageView makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.scrollView);
             if (leftView) {
