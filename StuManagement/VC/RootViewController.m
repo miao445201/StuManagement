@@ -80,18 +80,23 @@
     
     UIButton *activity = [[UIButton alloc] init];
     activity.backgroundColor = [UIColor redColor];
+    [activity setTitle:@"活动" forState:UIControlStateNormal];
     
     UIButton *organization = [[UIButton alloc] init];
     organization.backgroundColor = [UIColor orangeColor];
+    [organization setTitle:@"社团" forState:UIControlStateNormal];
     
     UIButton *spotlight = [[UIButton alloc] init];
-    spotlight.backgroundColor = [UIColor yellowColor];
+    spotlight.backgroundColor = [UIColor cyanColor];
+    [spotlight setTitle:@"新闻" forState:UIControlStateNormal];
 
     UIButton *weather = [[UIButton alloc] init];
     weather.backgroundColor = [UIColor greenColor];
+    [weather setTitle:@"天气" forState:UIControlStateNormal];
 
     UIButton *mine = [[UIButton alloc] init];
     mine.backgroundColor = [UIColor blueColor];
+    [mine setTitle:@"我" forState:UIControlStateNormal];
     
     NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
     for (UIButton *button in array) {

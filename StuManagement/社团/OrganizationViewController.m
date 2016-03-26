@@ -8,6 +8,8 @@
 
 #import "OrganizationViewController.h"
 #import "OrganizationTableViewCell.h"
+#import "CreateOrgViewController.h"
+#import "OrganizationDetailViewController.h"
 #import "MIYTableView.h"
 
 @interface OrganizationViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -51,22 +53,95 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] init];
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
-    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createOrganization)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
-
-    [self.tableView reloadData];
+    [self loadSubViews];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)loadSubViews
+{
+    
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:headerView];
+    
+    UIButton *classifyButton = [[UIButton alloc] init];
+    classifyButton.backgroundColor = [UIColor whiteColor];
+    [classifyButton setTitle:@"分类" forState:UIControlStateNormal];
+    [classifyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    classifyButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    [headerView addSubview:classifyButton];
+    
+    UIButton *collegeButton = [[UIButton alloc] init];
+    collegeButton.backgroundColor = [UIColor whiteColor];
+    [collegeButton setTitle:@"学院" forState:UIControlStateNormal];
+    [collegeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    collegeButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    [headerView addSubview:collegeButton];
+    
+    UIView *verticalLine = [[UIView alloc] init];
+    verticalLine.backgroundColor = [UIColor lightGrayColor];
+    [headerView addSubview:verticalLine];
+    
+    UIView *horizontaLine = [[UIView alloc] init];
+    horizontaLine.backgroundColor = [UIColor lightGrayColor];
+    [headerView addSubview:horizontaLine];
+    
+    
+    [headerView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(0);
+        make.height.equalTo(40);
+    }];
+    
+    [classifyButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.equalTo(0);
+        make.right.equalTo(headerView.centerX);
+    }];
+    
+    [collegeButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.bottom.equalTo(0);
+        make.left.equalTo(headerView.centerX);
+    }];
+    
+    [verticalLine makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(6);
+        make.bottom.equalTo(-6);
+        make.centerX.equalTo(0);
+        make.width.equalTo(1);
+    }];
+    
+    [horizontaLine makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(0);
+        make.height.equalTo(0.5);
+    }];
+
+    
+    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headerView.bottom);
+        make.left.right.bottom.equalTo(0);
+    }];
+    
+    [self.tableView reloadData];
+
+}
+
+- (void)createOrganization
+{
+    CreateOrgViewController *controller = [[CreateOrgViewController alloc] init];
+    controller.title = @"组织聚会";
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -95,6 +170,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OrganizationDetailViewController *controller = [[OrganizationDetailViewController alloc] init];
+    controller.title = self.cellArray[indexPath.row][@"name"];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 /*
   Override to support conditional editing of the table view.

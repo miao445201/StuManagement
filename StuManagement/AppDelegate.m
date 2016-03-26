@@ -25,7 +25,6 @@
     RootViewController *rootVC = [[RootViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
     self.window.rootViewController = nav;//进入的首个页面
-
     //设置控制器为Window的根控制器
     [self.window makeKeyAndVisible];//显示
     return YES;

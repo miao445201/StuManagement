@@ -50,7 +50,8 @@
     self.name = [[UILabel alloc] init];
     self.organization = [[UILabel alloc] init];
     self.numberOfPeople = [[UILabel alloc] init];
-    
+    UIView *line = [[UIView alloc] init];
+   
     self.image.contentMode = UIViewContentModeScaleToFill;
     
     self.name.font = [UIFont systemFontOfSize:14.0];
@@ -62,10 +63,13 @@
     
     self.numberOfPeople.textAlignment = NSTextAlignmentRight;
     
+    line.backgroundColor = [UIColor lightGrayColor];
+    
     [self.contentView addSubview:self.image];
     [self.contentView addSubview:self.name];
     [self.contentView addSubview:self.organization];
     [self.contentView addSubview:self.numberOfPeople];
+    [self.contentView addSubview:line];
     
     [self.image makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
@@ -89,6 +93,13 @@
         make.right.equalTo(-15);
         make.bottom.equalTo(self.organization);
     }];
+    
+    [line makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(15);
+        make.right.bottom.equalTo(0);
+        make.height.equalTo(0.5);
+    }];
+
     
 }
 

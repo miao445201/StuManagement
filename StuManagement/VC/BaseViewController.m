@@ -21,10 +21,12 @@
 }
 
 - (void)rightItemTapped
-{}
+{
+}
 
 - (void)extraItemTapped
-{}
+{
+}
 
 - (void)setLeftNaviItemWithTitle:(NSString *)title imageName:(NSString *)imageName
 {
