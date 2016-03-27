@@ -133,14 +133,18 @@
         make.left.right.bottom.equalTo(0);
     }];
     
-    [self.tableView reloadData];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)createOrganization
 {
     CreateOrgViewController *controller = [[CreateOrgViewController alloc] init];
-    controller.title = @"组织聚会";
+    controller.title = @"新建社团";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -172,6 +176,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     OrganizationDetailViewController *controller = [[OrganizationDetailViewController alloc] init];
     controller.title = self.cellArray[indexPath.row][@"name"];
     [self.navigationController pushViewController:controller animated:YES];
