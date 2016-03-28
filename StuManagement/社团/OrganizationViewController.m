@@ -54,7 +54,9 @@
 {
     [super viewDidLoad];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createOrganization)];
+    rightItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
     
     [self loadSubViews];
 }

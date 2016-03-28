@@ -37,7 +37,7 @@
     
     [self setNavigationTitle];
     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kMainProjColor;
     
     [self initSubViews];
 //    [self testScrollView];
@@ -65,7 +65,12 @@
     NSDictionary *weekDict = @{ @1:@"星期天", @2:@"星期一", @3:@"星期二", @4:@"星期三", @5:@"星期四", @6:@"星期五", @7:@"星期六" };
     
     self.navigationItem.title = [NSString stringWithFormat:@"%ld月%ld日 %@", (long)[comps month], (long)[comps day], weekDict[[NSNumber numberWithInteger:[comps weekday]]]];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                                    NSFontAttributeName : [UIFont boldSystemFontOfSize:19]};
+//    self.preferredStatusBarStyle = UIStatusBarStyleLightContent;
 }
+
+
 
 - (void)initSubViews
 {

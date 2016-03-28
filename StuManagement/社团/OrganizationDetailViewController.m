@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel *introductLabel;
 @property (nonatomic, strong) UILabel *noticeLabel;
 @property (nonatomic, strong) UILabel *numberLabel;
+@property (nonatomic, strong) UIView *reasonView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
@@ -137,7 +139,7 @@
     [likeButton setTitle:@"我喜欢" forState:UIControlStateNormal];
     [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     likeButton.backgroundColor = [UIColor redColor];
-    [likeButton addTarget:self action:@selector(clickLike) forControlEvents:UIControlEventTouchCancel];
+    [likeButton addTarget:self action:@selector(clickLike) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:likeButton];
     [likeButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.equalTo(0);
@@ -149,7 +151,7 @@
     [applyButton setTitle:@"申请加入" forState:UIControlStateNormal];
     [applyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     applyButton.backgroundColor = [UIColor orangeColor];
-    [applyButton addTarget:self action:@selector(clickApply) forControlEvents:UIControlEventTouchCancel];
+    [applyButton addTarget:self action:@selector(clickApply) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:applyButton];
     [applyButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.centerX);
@@ -176,12 +178,28 @@
 
 - (void)clickApply
 {
+    self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-100, 0, 0);
+    [self.view addSubview:self.reasonView];
     
+    [UIView animateWithDuration:0.4
+                          delay:0.1
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:1.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.reasonView.frame = CGRectMake(ScreenWidth/4, ScreenHeight/2-200, ScreenWidth/2, 200);
+                     }
+                     completion:nil];
 }
 
-
-
-
+- (UIView *)reasonView
+{
+    if (!_reasonView) {
+        _reasonView = [[UIView alloc] init];
+        _reasonView.backgroundColor = kMainProjColor;
+    }
+    return _reasonView;
+}
 
 
 

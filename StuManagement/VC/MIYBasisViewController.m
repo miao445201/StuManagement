@@ -23,6 +23,8 @@
 
     [self setLeftNaviItemWithTitle:nil OrImageName:nil];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,10 +63,10 @@
     }
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = backItem;
     backItem.title = @"";
-    backItem.tintColor = [UIColor redColor];
-
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)setRightNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName
@@ -98,5 +100,6 @@
     }];
     return line;
 }
+
 
 @end
