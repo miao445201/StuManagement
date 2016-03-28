@@ -15,5 +15,7 @@
 
 - (void)setLeftNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName;
 - (void)setRightNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName;
+- (UIImage *)imageFromURLString:(NSString *)urlstring;
+- (UIView *)addLineToSuperView:(UIView *)superView underView:(UIView *)view withGap:(CGFloat)gap;
 
 @end

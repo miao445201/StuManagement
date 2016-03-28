@@ -86,5 +86,17 @@
     }
 }
 
+- (UIView *)addLineToSuperView:(UIView *)superView underView:(UIView *)view withGap:(CGFloat)gap
+{
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [superView addSubview:line];
+    [line makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(view.bottom).offset(gap);
+        make.height.equalTo(0.5);
+    }];
+    return line;
+}
 
 @end

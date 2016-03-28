@@ -209,9 +209,4 @@
     view.layer.cornerRadius = radius;
 }
 
-- (UIImage *)imageFromURLString:(NSString *)urlstring
-{
-    return [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlstring]]];
-}  
-
 @end
