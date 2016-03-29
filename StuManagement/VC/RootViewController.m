@@ -105,7 +105,7 @@
     
     NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
     for (UIButton *button in array) {
-        [self makeView:button toRoundCorner:8];
+        [self makeView:button toRoundCorner:8 withWidth:0 color:nil];
     }
     
     [scrollView addSubview:imageRollView];
@@ -133,43 +133,41 @@
         make.top.equalTo(gap);
         make.left.equalTo(gap);
         make.right.equalTo(-gap);
-        make.height.equalTo(activity);
+        make.height.equalTo(activity.width);
     }];
 
     [activity makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(gap);
         make.right.equalTo(self.view.centerX).offset(-gap/2);
         make.top.equalTo(imageRollView.bottom).offset(gap);
-        make.height.equalTo(activity.width);
+        make.height.equalTo(activity.width).offset(-40);
     }];
     
     [organization makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.centerX).offset(gap/2);
         make.right.equalTo(-gap);
-        make.top.equalTo(activity);
-        make.width.equalTo(activity);
-        make.height.equalTo(organization.width);
+        make.top.width.height.equalTo(activity);
     }];
     
     [spotlight makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(activity.bottom).offset(gap);
         make.left.equalTo(gap);
         make.width.equalTo(5*ScreenWidth/9);
-        make.height.equalTo(weather);
+        make.height.equalTo(activity);
     }];
     
     [weather makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(spotlight);
         make.left.equalTo(spotlight.right).offset(gap);
         make.right.equalTo(-gap);
-        make.height.equalTo(weather.width);
+        make.height.equalTo(activity);
     }];
     
     [mine makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(spotlight.bottom).offset(gap);
         make.left.equalTo(gap);
         make.right.equalTo(-gap);
-        make.height.equalTo(weather);
+        make.height.equalTo(activity);
     }];
     
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
@@ -206,12 +204,6 @@
             break;
     }
     [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius
-{
-    view.layer.masksToBounds = YES;
-    view.layer.cornerRadius = radius;
 }
 
 @end

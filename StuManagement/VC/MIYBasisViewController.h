@@ -16,5 +16,6 @@
 - (void)setLeftNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName;
 - (void)setRightNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName;
 - (UIView *)addLineToSuperView:(UIView *)superView underView:(UIView *)view withGap:(CGFloat)gap;
+- (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius withWidth:(CGFloat)width color:(UIColor *)color;
 
 @end

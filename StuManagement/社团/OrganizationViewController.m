@@ -57,7 +57,6 @@
     rightItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    
     [self loadSubViews];
 }
 

@@ -18,7 +18,10 @@
 @property (nonatomic, strong) UILabel *numberLabel;
 @property (nonatomic, strong) UIView *reasonView;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UITextView *reasonTextView;
 
+@property (nonatomic) BOOL isTyping;
+@property (nonatomic) CGFloat keyboardHeight;
 @end
 
 @implementation OrganizationDetailViewController
@@ -27,13 +30,27 @@
 {
     [super viewDidLoad];
     [self loadSubViews];
-
+    [self registerForKeyboardNotifications];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
 }
 
 - (void)loadSubViews
@@ -178,16 +195,21 @@
 
 - (void)clickApply
 {
-    self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-100, 0, 0);
+    self.reasonView.alpha = 1.0;
+    self.backgroundView.alpha = 1.0;
+    self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-64, 0, 0);
+    [self.view addSubview:self.backgroundView];
     [self.view addSubview:self.reasonView];
+    CGFloat width = 250;
+    CGFloat height = 230;
     
     [UIView animateWithDuration:0.4
                           delay:0.1
-         usingSpringWithDamping:0.6
+         usingSpringWithDamping:0.7
           initialSpringVelocity:1.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         self.reasonView.frame = CGRectMake(ScreenWidth/4, ScreenHeight/2-200, ScreenWidth/2, 200);
+                         self.reasonView.frame = CGRectMake((ScreenWidth-width)/2, (ScreenHeight-height)/2-64, width, height);
                      }
                      completion:nil];
 }
@@ -196,11 +218,137 @@
 {
     if (!_reasonView) {
         _reasonView = [[UIView alloc] init];
-        _reasonView.backgroundColor = kMainProjColor;
+        _reasonView.clipsToBounds = YES;
+        _reasonView.backgroundColor = [UIColor whiteColor];
+        [self makeView:_reasonView toRoundCorner:5.0 withWidth:0 color:nil];
+
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"请输入理由";
+        [_reasonView addSubview:label];
+        [label makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(0);
+            make.top.equalTo(19);
+        }];
+        
+        self.reasonTextView = [[UITextView alloc] init];
+        [self makeView:self.reasonTextView toRoundCorner:5.0 withWidth:1.5 color:kMainProjColor];
+        [_reasonView addSubview:self.reasonTextView];
+        [self.reasonTextView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(15);
+            make.right.equalTo(-15);
+            make.height.equalTo(65);
+            make.top.equalTo(label.bottom).offset(12);
+        }];
+
+        UIButton *okButton = [[UIButton alloc] init];
+        okButton.backgroundColor = kMainProjColor;
+        [okButton setTitle:@"确定" forState:UIControlStateNormal];
+        [okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self makeView:okButton toRoundCorner:5.0 withWidth:0 color:nil];
+        [okButton addTarget:self action:@selector(clickOk) forControlEvents:UIControlEventTouchUpInside];
+        [_reasonView addSubview:okButton];
+        [okButton makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.reasonTextView);
+            make.height.equalTo(35);
+            make.top.equalTo(self.reasonTextView.bottom).offset(12);
+        }];
+        
+        UIButton *cancelButton = [[UIButton alloc] init];
+        cancelButton.backgroundColor = kMainProjColor;
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self makeView:cancelButton toRoundCorner:5.0 withWidth:0 color:nil];
+        [cancelButton addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
+        [_reasonView addSubview:cancelButton];
+        [cancelButton makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.equalTo(okButton);
+            make.top.equalTo(okButton.bottom).offset(8);
+        }];
+
+
     }
     return _reasonView;
 }
 
+- (UIView *)backgroundView
+{
+    if (!_backgroundView) {
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackgroundView)];
+        gesture.numberOfTapsRequired = 1;
+        [_backgroundView addGestureRecognizer:gesture];
+    }
+    return _backgroundView;
+}
 
+- (void)tapBackgroundView
+{
+    [self.reasonTextView resignFirstResponder];
+    if (self.isTyping) {
+        self.isTyping = NO;
+    } else {
+        [UIView animateWithDuration:0.4
+                         animations:^{
+                             self.reasonView.alpha = 0.0;
+                             self.backgroundView.alpha = 0.0;
+                         }
+                         completion:^(BOOL isFinished) {
+                             self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-100, 0, 0);
+                             [self.backgroundView removeFromSuperview];
+                             [self.reasonView removeFromSuperview];
+                             self.reasonView = nil;
+                         }];
+    }
+}
+
+- (void)clickOk
+{
+    //do
+    
+    
+    self.isTyping = NO;
+    [self tapBackgroundView];
+}
+
+- (void)clickCancel
+{
+    self.isTyping = NO;
+    [self tapBackgroundView];
+}
+
+- (void)checkReasonView
+{
+    CGFloat keyboardY = ScreenHeight - self.keyboardHeight;
+    CGFloat viewBottonY = self.reasonView.frame.origin.y + self.reasonView.frame.size.height;
+    if (keyboardY < viewBottonY + 20 + 64) {
+        CGRect frame = self.reasonView.frame;
+        frame.origin.y = keyboardY - 20 - frame.size.height - 64;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             self.reasonView.frame = frame;
+                         }];
+    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    self.keyboardHeight = keyboardRect.size.height;
+    self.isTyping = YES;
+    [self checkReasonView];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    CGFloat width = 250;
+    CGFloat height = 230;
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.reasonView.frame = CGRectMake((ScreenWidth-width)/2, (ScreenHeight-height)/2 - 64, width, height);
+                     }];
+}
 
 @end

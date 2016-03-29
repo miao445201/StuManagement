@@ -101,5 +101,13 @@
     return line;
 }
 
+- (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius withWidth:(CGFloat)width color:(UIColor *)color;
+{
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = radius;
+    view.layer.borderColor = color.CGColor;
+    view.layer.borderWidth = width;
+}
+
 
 @end

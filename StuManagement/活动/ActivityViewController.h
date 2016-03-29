@@ -11,3 +11,9 @@
 @interface ActivityViewController : MIYBasisViewController
 
 @end
+
+@interface ActivityTableViewCell : UITableViewCell
+
+- (void)loadData:(NSDictionary *)data;
+
+@end
