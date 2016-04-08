@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
 		6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F564B1CA1779A00E27D12 /* LoginViewController.m */; };
+		6D1A967A1CB7942600FCFF2A /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A96791CB7942600FCFF2A /* ActivityDetailViewController.m */; };
+		6D1A967C1CB79E8B00FCFF2A /* testXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D1A967B1CB79E8B00FCFF2A /* testXib.xib */; };
+		6D1A96821CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A96811CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m */; };
 		6D29C38A1CA50F8F0031B908 /* OrganizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3891CA50F8F0031B908 /* OrganizationViewController.m */; };
 		6D29C38D1CA510DC0031B908 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C38C1CA510DC0031B908 /* ActivityViewController.m */; };
 		6D29C3901CA511740031B908 /* SpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C38F1CA511740031B908 /* SpotlightViewController.m */; };
@@ -46,6 +49,11 @@
 /* Begin PBXFileReference section */
 		6D0F564A1CA1779A00E27D12 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6D0F564B1CA1779A00E27D12 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6D1A96781CB7942600FCFF2A /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
+		6D1A96791CB7942600FCFF2A /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
+		6D1A967B1CB79E8B00FCFF2A /* testXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testXib.xib; sourceTree = "<group>"; };
+		6D1A96801CB8014A00FCFF2A /* UIImageView+MIYLoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MIYLoadImage.h"; sourceTree = "<group>"; };
+		6D1A96811CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MIYLoadImage.m"; sourceTree = "<group>"; };
 		6D29C3881CA50F8F0031B908 /* OrganizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationViewController.h; sourceTree = "<group>"; };
 		6D29C3891CA50F8F0031B908 /* OrganizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationViewController.m; sourceTree = "<group>"; };
 		6D29C38B1CA510DC0031B908 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -129,6 +137,7 @@
 			children = (
 				6D29C38B1CA510DC0031B908 /* ActivityViewController.h */,
 				6D29C38C1CA510DC0031B908 /* ActivityViewController.m */,
+				6D1A96771CB7940000FCFF2A /* 活动详情 */,
 			);
 			name = "活动";
 			path = "StuManagement/活动";
@@ -168,6 +177,15 @@
 			path = "StuManagement/新闻";
 			sourceTree = SOURCE_ROOT;
 		};
+		6D1A96771CB7940000FCFF2A /* 活动详情 */ = {
+			isa = PBXGroup;
+			children = (
+				6D1A96781CB7942600FCFF2A /* ActivityDetailViewController.h */,
+				6D1A96791CB7942600FCFF2A /* ActivityDetailViewController.m */,
+			);
+			name = "活动详情";
+			sourceTree = "<group>";
+		};
 		6DC4B4C01CA3D305006FB4EC /* 类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +195,8 @@
 				6D29C39B1CA5224A0031B908 /* MIYTableView.m */,
 				6D29C3A01CA52D140031B908 /* MIYTableViewController.h */,
 				6D29C3A11CA52D140031B908 /* MIYTableViewController.m */,
+				6D1A96801CB8014A00FCFF2A /* UIImageView+MIYLoadImage.h */,
+				6D1A96811CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m */,
 			);
 			path = "类";
 			sourceTree = "<group>";
@@ -234,6 +254,7 @@
 				6D29C3951CA513F70031B908 /* MIYBasisViewController.m */,
 				9116D2BE1C9D0A3D00D80A50 /* RootViewController.h */,
 				9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */,
+				6D1A967B1CB79E8B00FCFF2A /* testXib.xib */,
 				6D0F56451CA1778400E27D12 /* 登录 */,
 				6D0F56461CA1778400E27D12 /* 活动 */,
 				6D0F56471CA1778400E27D12 /* 社团 */,
@@ -383,6 +404,7 @@
 				6DC4B4C91CA3E7B1006FB4EC /* 3.jpg in Resources */,
 				6DC63BA71CA81C9F00F467A4 /* error.png in Resources */,
 				6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */,
+				6D1A967C1CB79E8B00FCFF2A /* testXib.xib in Resources */,
 				91EAA4B51C9D06A400DE1307 /* LaunchScreen.storyboard in Resources */,
 				9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */,
 				6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */,
@@ -459,10 +481,12 @@
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
 				6D2E68D01CA6D6C100F1D415 /* OrganizationDetailViewController.m in Sources */,
 				6D29C3931CA512060031B908 /* MineViewController.m in Sources */,
+				6D1A96821CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m in Sources */,
 				91EAA4A71C9D06A400DE1307 /* main.m in Sources */,
 				6D29C3961CA513F70031B908 /* MIYBasisViewController.m in Sources */,
 				6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */,
 				6D29C3A21CA52D140031B908 /* MIYTableViewController.m in Sources */,
+				6D1A967A1CB7942600FCFF2A /* ActivityDetailViewController.m in Sources */,
 				6D29C3901CA511740031B908 /* SpotlightViewController.m in Sources */,
 				6D29C38D1CA510DC0031B908 /* ActivityViewController.m in Sources */,
 				9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */,

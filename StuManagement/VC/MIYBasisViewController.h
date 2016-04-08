@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+MIYLoadImage.h"
 
 @interface MIYBasisViewController : UIViewController
 
@@ -17,5 +18,6 @@
 - (void)setRightNaviItemWithTitle:(NSString *)title OrImageName:(NSString *)imageName;
 - (UIView *)addLineToSuperView:(UIView *)superView underView:(UIView *)view withGap:(CGFloat)gap;
 - (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius withWidth:(CGFloat)width color:(UIColor *)color;
+- (UIImage *)imageWithBgColor:(UIColor *)color;
 
 @end

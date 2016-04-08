@@ -37,20 +37,16 @@
     
     [self setNavigationTitle];
     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationController.navigationBar.barTintColor = kMainProjColor;
-    
+//    self.navigationController.navigationBar.barTintColor = kMainProjColor;
+    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:kMainProjColor] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[self imageWithBgColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0]]];
+
     [self initSubViews];
-//    [self testScrollView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
-}
-
-- (void)testScrollView
-{
 
 }
 

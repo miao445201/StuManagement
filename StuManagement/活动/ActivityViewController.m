@@ -9,6 +9,7 @@
 #define kBackgroundColor        [UIColor colorWithRed:249/255.0 green:245/255.0 blue:245/255.0 alpha:1]
 
 #import "ActivityViewController.h"
+#import "ActivityDetailViewController.h"
 
 @interface ActivityViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -120,7 +121,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ActivityDetailViewController *controller = [[ActivityDetailViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end
