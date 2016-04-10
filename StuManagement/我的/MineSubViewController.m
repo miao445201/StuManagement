@@ -8,6 +8,7 @@
 
 #import "MineSubViewController.h"
 #import "MineSubTableViewCell.h"
+#import "MJRefresh.h"
 
 @interface MineSubViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -33,6 +34,33 @@
     [super viewDidLoad];
     self.view.backgroundColor = kLightWhiteColor;
     [self loadSubViews];
+    
+    self.tableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        // [self.tableView.mj_header beginRefreshing]
+        // [self.tableView.mj_header endRefreshing];
+        NSRange range = NSMakeRange(3, self.cellArray.count-3);
+        [self.cellArray removeObjectsInRange:range];
+        [self.tableView reloadData];
+        [self.tableView.mj_footer resetNoMoreData];
+        [self.tableView.mj_header endRefreshing];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        // [self.tableView.mj_footer resetNoMoreData];
+        // [self.tableView.mj_footer endRefreshingWithNoMoreData]
+        if (self.cellArray.count > 10) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            return;
+        }
+        [self.cellArray addObjectsFromArray:self.cellArray];
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
