@@ -23,6 +23,8 @@
 		6D2E68CA1CA6D35100F1D415 /* CreateOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E68C91CA6D35100F1D415 /* CreateOrgViewController.m */; };
 		6D2E68D01CA6D6C100F1D415 /* OrganizationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E68CF1CA6D6C100F1D415 /* OrganizationDetailViewController.m */; };
 		6D4B3DAB1CAAA96A00024DD7 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4B3DAA1CAAA96A00024DD7 /* menu.png */; };
+		6D5D9D0F1CBA650500320103 /* MineSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D9D0E1CBA650500320103 /* MineSubViewController.m */; };
+		6D5D9D121CBA6E0D00320103 /* MineSubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D9D111CBA6E0D00320103 /* MineSubTableViewCell.m */; };
 		6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */; };
 		6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */; };
 		6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */; };
@@ -75,6 +77,10 @@
 		6D2E68CE1CA6D6C100F1D415 /* OrganizationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationDetailViewController.h; sourceTree = "<group>"; };
 		6D2E68CF1CA6D6C100F1D415 /* OrganizationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationDetailViewController.m; sourceTree = "<group>"; };
 		6D4B3DAA1CAAA96A00024DD7 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		6D5D9D0D1CBA650500320103 /* MineSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSubViewController.h; sourceTree = "<group>"; };
+		6D5D9D0E1CBA650500320103 /* MineSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSubViewController.m; sourceTree = "<group>"; };
+		6D5D9D101CBA6E0D00320103 /* MineSubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSubTableViewCell.h; sourceTree = "<group>"; };
+		6D5D9D111CBA6E0D00320103 /* MineSubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSubTableViewCell.m; sourceTree = "<group>"; };
 		6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRollScrollView.h; sourceTree = "<group>"; };
 		6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRollScrollView.m; sourceTree = "<group>"; };
 		6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 			children = (
 				6D29C3911CA512060031B908 /* MineViewController.h */,
 				6D29C3921CA512060031B908 /* MineViewController.m */,
+				6D5D9D0D1CBA650500320103 /* MineSubViewController.h */,
+				6D5D9D0E1CBA650500320103 /* MineSubViewController.m */,
+				6D5D9D101CBA6E0D00320103 /* MineSubTableViewCell.h */,
+				6D5D9D111CBA6E0D00320103 /* MineSubTableViewCell.m */,
 			);
 			name = "我的";
 			path = "StuManagement/我的";
@@ -477,6 +487,8 @@
 				9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */,
 				9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */,
 				6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */,
+				6D5D9D0F1CBA650500320103 /* MineSubViewController.m in Sources */,
+				6D5D9D121CBA6E0D00320103 /* MineSubTableViewCell.m in Sources */,
 				6D29C38A1CA50F8F0031B908 /* OrganizationViewController.m in Sources */,
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
 				6D2E68D01CA6D6C100F1D415 /* OrganizationDetailViewController.m in Sources */,

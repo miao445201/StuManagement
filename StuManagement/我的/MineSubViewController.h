@@ -1,15 +1,13 @@
 //
-//  MineViewController.h
+//  MineSubViewController.h
 //  StuManagement
 //
-//  Created by MiY on 16/3/25.
+//  Created by MiY on 16/4/10.
 //  Copyright © 2016年 miao. All rights reserved.
 //
 
 #import "MIYBasisViewController.h"
 
-@interface MineViewController : MIYBasisViewController
-
-
+@interface MineSubViewController : MIYBasisViewController
 
 @end
