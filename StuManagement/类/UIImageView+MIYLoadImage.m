@@ -26,7 +26,6 @@
             [self setImage:[UIImage imageWithData:data]];
         });
     });
-    
 }
 
 @end

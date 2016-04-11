@@ -62,12 +62,11 @@
         make.left.equalTo(self.nameLabel);
         make.width.height.equalTo(15);
     }];
-    
-    
+
     self.timeLabel = [[UILabel alloc] init];
     self.timeLabel.textColor = kMainBlackColor;
     self.timeLabel.font = [UIFont systemFontOfSize:15.0];
-   [self.contentView addSubview:self.timeLabel];
+    [self.contentView addSubview:self.timeLabel];
     [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(timeImage).offset(-1);
         make.left.equalTo(timeImage.right).offset(5);
@@ -81,6 +80,7 @@
         make.height.equalTo(0.5);
     }];
 }
+
 
 - (void)loadData:(NSDictionary *)data
 {

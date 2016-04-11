@@ -6,10 +6,9 @@
 //  Copyright © 2016年 miao. All rights reserved.
 //
 
-#define kBackgroundColor        [UIColor colorWithRed:249/255.0 green:245/255.0 blue:245/255.0 alpha:1]
-
 #import "ActivityViewController.h"
 #import "ActivityDetailViewController.h"
+#import "ActivityPublicViewController.h"
 
 @interface ActivityViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -33,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = kBackgroundColor;
+    self.view.backgroundColor = kLightWhiteColor;
     
 //    UIButton *menu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 //    [menu setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -71,7 +70,7 @@
 - (void)loadSubViews
 {
     self.tableView = [[UITableView alloc] init];
-    self.tableView.backgroundColor = kBackgroundColor;
+    self.tableView.backgroundColor = kLightWhiteColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -90,7 +89,8 @@
 
 - (void)createActivity
 {
-    
+    ActivityPublicViewController *controller = [[ActivityPublicViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -157,7 +157,7 @@
 
 - (void)loadSubViews
 {
-    self.contentView.backgroundColor = kBackgroundColor;
+    self.contentView.backgroundColor = kLightWhiteColor;
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:view];

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29E3F8B929DB1C1570FBA56E /* libPods-StuManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */; };
 		6D0F564C1CA1779A00E27D12 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F564B1CA1779A00E27D12 /* LoginViewController.m */; };
+		6D12C5A91CBB4FF300833A05 /* ActivityPublicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12C5A81CBB4FF300833A05 /* ActivityPublicViewController.m */; };
 		6D1A967A1CB7942600FCFF2A /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A96791CB7942600FCFF2A /* ActivityDetailViewController.m */; };
 		6D1A967C1CB79E8B00FCFF2A /* testXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D1A967B1CB79E8B00FCFF2A /* testXib.xib */; };
 		6D1A96821CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A96811CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m */; };
@@ -51,6 +52,8 @@
 /* Begin PBXFileReference section */
 		6D0F564A1CA1779A00E27D12 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6D0F564B1CA1779A00E27D12 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6D12C5A71CBB4FF300833A05 /* ActivityPublicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityPublicViewController.h; sourceTree = "<group>"; };
+		6D12C5A81CBB4FF300833A05 /* ActivityPublicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityPublicViewController.m; sourceTree = "<group>"; };
 		6D1A96781CB7942600FCFF2A /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		6D1A96791CB7942600FCFF2A /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		6D1A967B1CB79E8B00FCFF2A /* testXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testXib.xib; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 			children = (
 				6D29C38B1CA510DC0031B908 /* ActivityViewController.h */,
 				6D29C38C1CA510DC0031B908 /* ActivityViewController.m */,
+				6D12C5A61CBB4FA900833A05 /* 发布活动 */,
 				6D1A96771CB7940000FCFF2A /* 活动详情 */,
 			);
 			name = "活动";
@@ -186,6 +190,15 @@
 			name = "新闻";
 			path = "StuManagement/新闻";
 			sourceTree = SOURCE_ROOT;
+		};
+		6D12C5A61CBB4FA900833A05 /* 发布活动 */ = {
+			isa = PBXGroup;
+			children = (
+				6D12C5A71CBB4FF300833A05 /* ActivityPublicViewController.h */,
+				6D12C5A81CBB4FF300833A05 /* ActivityPublicViewController.m */,
+			);
+			name = "发布活动";
+			sourceTree = "<group>";
 		};
 		6D1A96771CB7940000FCFF2A /* 活动详情 */ = {
 			isa = PBXGroup;
@@ -493,6 +506,7 @@
 				91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */,
 				6D2E68D01CA6D6C100F1D415 /* OrganizationDetailViewController.m in Sources */,
 				6D29C3931CA512060031B908 /* MineViewController.m in Sources */,
+				6D12C5A91CBB4FF300833A05 /* ActivityPublicViewController.m in Sources */,
 				6D1A96821CB8014A00FCFF2A /* UIImageView+MIYLoadImage.m in Sources */,
 				91EAA4A71C9D06A400DE1307 /* main.m in Sources */,
 				6D29C3961CA513F70031B908 /* MIYBasisViewController.m in Sources */,
