@@ -23,17 +23,14 @@
 		6D29C3A21CA52D140031B908 /* MIYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D29C3A11CA52D140031B908 /* MIYTableViewController.m */; };
 		6D2E68CA1CA6D35100F1D415 /* CreateOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E68C91CA6D35100F1D415 /* CreateOrgViewController.m */; };
 		6D2E68D01CA6D6C100F1D415 /* OrganizationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2E68CF1CA6D6C100F1D415 /* OrganizationDetailViewController.m */; };
-		6D4B3DAB1CAAA96A00024DD7 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4B3DAA1CAAA96A00024DD7 /* menu.png */; };
 		6D5D9D0F1CBA650500320103 /* MineSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D9D0E1CBA650500320103 /* MineSubViewController.m */; };
 		6D5D9D121CBA6E0D00320103 /* MineSubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5D9D111CBA6E0D00320103 /* MineSubTableViewCell.m */; };
 		6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */; };
-		6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */; };
-		6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */; };
-		6DC4B4C91CA3E7B1006FB4EC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */; };
 		6DC63BA71CA81C9F00F467A4 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC63BA31CA81C9F00F467A4 /* error.png */; };
 		6DC63BA81CA81C9F00F467A4 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC63BA41CA81C9F00F467A4 /* error@2x.png */; };
 		6DC63BA91CA81C9F00F467A4 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC63BA51CA81C9F00F467A4 /* success.png */; };
 		6DC63BAA1CA81C9F00F467A4 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC63BA61CA81C9F00F467A4 /* success@2x.png */; };
+		6DCD705D1CBD27DB0044C95E /* denglu111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD705C1CBD27DB0044C95E /* denglu111.jpg */; };
 		9116D2BC1C9D0A2600D80A50 /* BaseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2B91C9D0A2600D80A50 /* BaseMenuViewController.m */; };
 		9116D2BD1C9D0A2600D80A50 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BB1C9D0A2600D80A50 /* BaseViewController.m */; };
 		9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9116D2BF1C9D0A3D00D80A50 /* RootViewController.m */; };
@@ -79,20 +76,17 @@
 		6D2E68C91CA6D35100F1D415 /* CreateOrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateOrgViewController.m; sourceTree = "<group>"; };
 		6D2E68CE1CA6D6C100F1D415 /* OrganizationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationDetailViewController.h; sourceTree = "<group>"; };
 		6D2E68CF1CA6D6C100F1D415 /* OrganizationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationDetailViewController.m; sourceTree = "<group>"; };
-		6D4B3DAA1CAAA96A00024DD7 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		6D5D9D0D1CBA650500320103 /* MineSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSubViewController.h; sourceTree = "<group>"; };
 		6D5D9D0E1CBA650500320103 /* MineSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSubViewController.m; sourceTree = "<group>"; };
 		6D5D9D101CBA6E0D00320103 /* MineSubTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSubTableViewCell.h; sourceTree = "<group>"; };
 		6D5D9D111CBA6E0D00320103 /* MineSubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSubTableViewCell.m; sourceTree = "<group>"; };
 		6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRollScrollView.h; sourceTree = "<group>"; };
 		6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRollScrollView.m; sourceTree = "<group>"; };
-		6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
-		6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		6DC63BA31CA81C9F00F467A4 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 		6DC63BA41CA81C9F00F467A4 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		6DC63BA51CA81C9F00F467A4 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
 		6DC63BA61CA81C9F00F467A4 /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@2x.png"; sourceTree = "<group>"; };
+		6DCD705C1CBD27DB0044C95E /* denglu111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = denglu111.jpg; sourceTree = "<group>"; };
 		8E3BC7D658DAD5D341A2F2DA /* libPods-StuManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StuManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9116D2B61C9D090F00D80A50 /* StuMan-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StuMan-pch.pch"; sourceTree = "<group>"; };
 		9116D2B71C9D094600D80A50 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -252,6 +246,7 @@
 		9116D2B31C9D07E600D80A50 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6DCD705C1CBD27DB0044C95E /* denglu111.jpg */,
 				9116D2C31C9D0AAF00D80A50 /* Button_circle_checked_32px.png */,
 				9116D2C41C9D0AAF00D80A50 /* Circle_32px.png */,
 				9116D2C51C9D0AAF00D80A50 /* icon_header_back@2x.png */,
@@ -318,10 +313,6 @@
 				91EAA4A81C9D06A400DE1307 /* AppDelegate.h */,
 				91EAA4A91C9D06A400DE1307 /* AppDelegate.m */,
 				9116D2B71C9D094600D80A50 /* Constant.h */,
-				6DC4B4C41CA3E7B1006FB4EC /* 1.jpg */,
-				6DC4B4C51CA3E7B1006FB4EC /* 2.jpg */,
-				6DC4B4C61CA3E7B1006FB4EC /* 3.jpg */,
-				6D4B3DAA1CAAA96A00024DD7 /* menu.png */,
 				9116D2B41C9D07F000D80A50 /* VC */,
 				6DC4B4C01CA3D305006FB4EC /* 类 */,
 				9116D2B21C9D07D600D80A50 /* Model */,
@@ -424,19 +415,16 @@
 				9116D2C91C9D0AAF00D80A50 /* Button_circle_checked_32px.png in Resources */,
 				6DC63BA91CA81C9F00F467A4 /* success.png in Resources */,
 				6DC63BAA1CA81C9F00F467A4 /* success@2x.png in Resources */,
-				6DC4B4C91CA3E7B1006FB4EC /* 3.jpg in Resources */,
 				6DC63BA71CA81C9F00F467A4 /* error.png in Resources */,
-				6DC4B4C81CA3E7B1006FB4EC /* 2.jpg in Resources */,
 				6D1A967C1CB79E8B00FCFF2A /* testXib.xib in Resources */,
 				91EAA4B51C9D06A400DE1307 /* LaunchScreen.storyboard in Resources */,
 				9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */,
-				6DC4B4C71CA3E7B1006FB4EC /* 1.jpg in Resources */,
 				91EAA4B21C9D06A400DE1307 /* Assets.xcassets in Resources */,
-				6D4B3DAB1CAAA96A00024DD7 /* menu.png in Resources */,
 				9116D2CC1C9D0AAF00D80A50 /* icon_header_back@3x.png in Resources */,
 				9116D2CA1C9D0AAF00D80A50 /* Circle_32px.png in Resources */,
 				9116D2CD1C9D0AAF00D80A50 /* line_hon_1px_up.png in Resources */,
 				9116D2CB1C9D0AAF00D80A50 /* icon_header_back@2x.png in Resources */,
+				6DCD705D1CBD27DB0044C95E /* denglu111.jpg in Resources */,
 				6DC63BA81CA81C9F00F467A4 /* error@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

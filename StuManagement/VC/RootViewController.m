@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "LoginViewController.h"
 #import "ImageRollScrollView.h"
 #import "ActivityViewController.h"
 #import "OrganizationViewController.h"
@@ -34,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    LoginViewController *loginController = [[LoginViewController alloc] init];
+    [self presentViewController:loginController animated:NO completion:nil];
+    
     
     [self setNavigationTitle];
     self.navigationItem.leftBarButtonItem = nil;
@@ -82,22 +86,27 @@
     UIButton *activity = [[UIButton alloc] init];
     activity.backgroundColor = [UIColor redColor];
     [activity setTitle:@"活动" forState:UIControlStateNormal];
+    [activity setImage:[UIImage imageNamed:@"huodong"] forState:UIControlStateNormal];
     
     UIButton *organization = [[UIButton alloc] init];
     organization.backgroundColor = [UIColor orangeColor];
     [organization setTitle:@"社团" forState:UIControlStateNormal];
+    [organization setImage:[UIImage imageNamed:@"shetuan"] forState:UIControlStateNormal];
     
     UIButton *spotlight = [[UIButton alloc] init];
     spotlight.backgroundColor = [UIColor cyanColor];
     [spotlight setTitle:@"新闻" forState:UIControlStateNormal];
-
+    [spotlight setImage:[UIImage imageNamed:@"xinwen"] forState:UIControlStateNormal];
+    
     UIButton *weather = [[UIButton alloc] init];
     weather.backgroundColor = [UIColor greenColor];
     [weather setTitle:@"天气" forState:UIControlStateNormal];
-
+    [weather setImage:[UIImage imageNamed:@"tianqi"] forState:UIControlStateNormal];
+    
     UIButton *mine = [[UIButton alloc] init];
     mine.backgroundColor = [UIColor blueColor];
     [mine setTitle:@"我" forState:UIControlStateNormal];
+    [mine setImage:[UIImage imageNamed:@"wo"] forState:UIControlStateNormal];
     
     NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
     for (UIButton *button in array) {
@@ -171,13 +180,13 @@
         make.bottom.greaterThanOrEqualTo(self.view);
     }];
     
-    UIImage *image1 = [UIImage imageNamed:@"1.jpg"];
-    UIImage *image2 = [UIImage imageNamed:@"2.jpg"];
-    UIImage *image3 = [UIImage imageNamed:@"3.jpg"];
+    UIImage *image1 = [UIImage imageNamed:@"xinwen111.jpg"];
+    UIImage *image2 = [UIImage imageNamed:@"xinwen222.jpg"];
+    UIImage *image3 = [UIImage imageNamed:@"xinwen333.jpg"];
     NSArray *images = @[image1, image2, image3];
     NSArray *texts = @[@"我说今晚月亮好美", @"你说是的", @"写台词送给男生签名照"];
     
-    [imageRollView loadImages:images withRollTime:5 optionalText:texts andContentMode:nil];
+    [imageRollView loadImages:images withRollTime:3 optionalText:texts andContentMode:nil];
 }
 
 - (void)pushToViewController:(UIButton *)sender

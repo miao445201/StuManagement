@@ -31,9 +31,9 @@
 
 - (void)loadData
 {
-    UIImage *image1 = [UIImage imageNamed:@"1.jpg"];
-    UIImage *image2 = [UIImage imageNamed:@"2.jpg"];
-    UIImage *image3 = [UIImage imageNamed:@"3.jpg"];
+    UIImage *image1 = [UIImage imageNamed:@"xinwen111.jpg"];
+    UIImage *image2 = [UIImage imageNamed:@"xinwen222.jpg"];
+    UIImage *image3 = [UIImage imageNamed:@"xinwen333.jpg"];
 
     self.cellArray = [@[@{ @"image":image1, @"name":@"计算机科学与技术学院1", @"organization":@"计算机学院1", @"numberOfPeople":@"11" },
                         @{ @"image":image2, @"name":@"计算机科学与技术学院2", @"organization":@"计算机学院2", @"numberOfPeople":@"12" },

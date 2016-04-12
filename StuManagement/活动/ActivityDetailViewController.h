@@ -10,4 +10,6 @@
 
 @interface ActivityDetailViewController : MIYBasisViewController
 
+@property (nonatomic, strong) NSDictionary *data;
+
 @end

@@ -10,6 +10,7 @@
 
 @interface ActivityPublicViewController () <UITextViewDelegate>
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UITextField *nameTextField;
 @property (nonatomic, strong) UITextView *describeTextView;
@@ -18,6 +19,8 @@
 @property (nonatomic, strong) UILabel *endTimeLabel;
 @property (nonatomic, strong) UITextField *costTextField;
 @property (nonatomic, strong) UILabel *typeLabel;
+@property (nonatomic) CGFloat keyboardHeight;
+@property (nonatomic) CGFloat lastOffsetY;
 
 @end
 
@@ -42,6 +45,8 @@
     self.navigationItem.rightBarButtonItem = rightItem;
     
     [self loadSubViews];
+    [self addTapGestureToRemoveKeyboard];
+    [self registerForKeyboardNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +58,7 @@
 - (void)loadSubViews
 {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    self.scrollView = scrollView;
     [self.view addSubview:scrollView];
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -60,7 +66,8 @@
     }];
     
     self.image = [[UIImageView alloc] init];
-    [self.image loadImageWithUrl:@"http://i03.pic.sogou.com/cbfb092dd104d538"];
+    [self.image setImage:[UIImage imageNamed:@"tianjiahuodong"]];
+//    [self.image loadImageWithUrl:@"http://i03.pic.sogou.com/cbfb092dd104d538"];
     [scrollView addSubview:self.image];
     [self.image makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(0);
@@ -89,9 +96,9 @@
     self.nameTextField.placeholder = @"输入活动名称";
     self.nameTextField.borderStyle = UITextBorderStyleNone;
     self.nameTextField.font = [UIFont systemFontOfSize:15.0];
-    [firstView addSubview:self.nameTextField];
+    [scrollView addSubview:self.nameTextField];
     [self.nameTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.equalTo(0);
+        make.top.right.equalTo(firstView);
         make.left.equalTo(image111.right).offset(10);
         make.height.equalTo(55);
     }];
@@ -104,10 +111,10 @@
     self.describeTextView.text = @"填写活动描述,让更多的人参与活动...";
     self.describeTextView.font = [UIFont systemFontOfSize:15.0];
     [self.describeTextView setTextContainerInset:UIEdgeInsetsMake(10, 10, 10, 10)];
-    [firstView addSubview:self.describeTextView];
+    [scrollView addSubview:self.describeTextView];
     [self.describeTextView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameTextField.bottom).offset(1);
-        make.left.right.bottom.equalTo(0);
+        make.left.right.bottom.equalTo(firstView);
     }];
     
     //22222222
@@ -166,7 +173,7 @@
         make.height.equalTo(50);
     }];
 
-    UIImageView *image333 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shijian"]];
+    UIImageView *image333 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shijianjieshu"]];
     [secondView2 addSubview:image333];
     [image333 makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(image111);
@@ -230,10 +237,10 @@
     self.placeTextField.font = [UIFont systemFontOfSize:14.0];
     self.placeTextField.placeholder = @"输入活动地址";
     self.placeTextField.textAlignment = NSTextAlignmentRight;
-    [thirdView addSubview:self.placeTextField];
+    [scrollView addSubview:self.placeTextField];
     [self.placeTextField makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(startTimeLabel);
-        make.centerY.equalTo(0);
+        make.centerY.equalTo(thirdView);
     }];
     UIImageView *jiantou3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jiantou"]];
     [thirdView addSubview:jiantou3];
@@ -274,10 +281,10 @@
     self.costTextField.font = [UIFont systemFontOfSize:14.0];
     self.costTextField.placeholder = @"输入活动费用";
     self.costTextField.textAlignment = NSTextAlignmentRight;
-    [fourthView addSubview:self.costTextField];
+    [scrollView addSubview:self.costTextField];
     [self.costTextField makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(startTimeLabel);
-        make.centerY.equalTo(0);
+        make.centerY.equalTo(fourthView);
     }];
     UIImageView *jiantou4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jiantou"]];
     [fourthView addSubview:jiantou4];
@@ -296,6 +303,14 @@
         make.top.equalTo(fourthView.bottom).offset(12);
         make.height.equalTo(50);
     }];
+    UIImageView *image666 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yuanjiyuanxiao"]];
+    [fiveView addSubview:image666];
+    [image666 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(image111);
+        make.width.height.equalTo(image111);
+        make.centerY.equalTo(0);
+    }];
+
     UILabel *cost = [[UILabel alloc] init];
     cost.text = @"活动类别";
     cost.font = [UIFont systemFontOfSize:15.0];
@@ -313,6 +328,14 @@
         make.right.equalTo(startTimeLabel);
         make.centerY.equalTo(0);
     }];
+    UIImageView *jiantou5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jiantouxia"]];
+    [fiveView addSubview:jiantou5];
+    [jiantou5 makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(0);
+        make.right.equalTo(jiantou1);
+        make.width.height.equalTo(jiantou1);
+    }];
+
     
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(fiveView).offset(50);
@@ -324,6 +347,87 @@
 {
     
 }
+
+//添加收回键盘的手势
+- (void)addTapGestureToRemoveKeyboard
+{
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollView)];
+    [recognizer setNumberOfTapsRequired:1];
+    [recognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:recognizer];
+    
+}
+
+//收回键盘手势的target
+- (void)touchScrollView
+{
+    [self.nameTextField resignFirstResponder];
+    [self.describeTextView resignFirstResponder];
+    [self.placeTextField resignFirstResponder];
+    [self.costTextField resignFirstResponder];
+}
+
+
+//根据键盘高度重置把view往上移
+- (void)setViewMovedUp:(BOOL)movedUp
+{
+    UIView *view = nil;
+    if ([self.nameTextField isFirstResponder]) {
+        view = self.nameTextField;
+    } else if ([self.describeTextView isFirstResponder]) {
+        view = self.describeTextView;
+    } else if ([self.placeTextField isFirstResponder]) {
+        view = self.placeTextField;
+    } else if ([self.costTextField isFirstResponder]) {
+        view = self.costTextField;
+    }
+    
+    CGFloat upHeight = 0;
+    if (ScreenHeight - self.keyboardHeight > view.frame.origin.y + view.frame.size.height + 120) {
+        upHeight = 0;
+    } else {
+        upHeight = view.frame.origin.y + view.frame.size.height - (ScreenHeight - self.keyboardHeight) + 120;
+    }
+    
+    if (movedUp) {
+        self.lastOffsetY = self.scrollView.contentOffset.y;
+        [self.scrollView setContentOffset:CGPointMake(0, upHeight) animated:YES];
+    } else {
+        [self.scrollView setContentOffset:CGPointMake(0, self.lastOffsetY) animated:YES];
+    }
+    
+    
+}
+
+
+//=========================获取键盘高度=======================
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+}
+//键盘弹出同事改变offset
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    self.keyboardHeight = keyboardRect.size.height;
+    [self setViewMovedUp:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self setViewMovedUp:NO];
+}
+//==========================================================
 
 #pragma mark - UITextView Delegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView       //开始输入前

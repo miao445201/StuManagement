@@ -8,6 +8,8 @@
 
 #import "ActivityDetailViewController.h"
 
+const NSInteger maxNumberOfWords = 150;
+
 @interface ActivityDetailViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -21,6 +23,8 @@
 @property (nonatomic, strong) UIView *firstView;
 @property (nonatomic, strong) UIView *secondView;
 @property (nonatomic, strong) UIView *underLine;
+
+@property (nonatomic) BOOL isReadyToMagnify;
 @end
 
 @implementation ActivityDetailViewController
@@ -36,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self loadSubViews];
 }
 
@@ -70,9 +74,7 @@
         make.width.equalTo(self.view);
     }];
     
-    self.image = [[UIImageView alloc] init];
-    self.image.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.image loadImageWithUrl:@"http://s1.sinaimg.cn/middle/3fc0c02bnbc96fab109c0&690"];
+    self.image = [[UIImageView alloc] initWithImage:self.data[@"image"]];
     
     [scrollView addSubview:self.image];
     [self.image makeConstraints:^(MASConstraintMaker *make) {
@@ -92,7 +94,7 @@
     }];
 
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.text = @"不一起去踏青吗？";
+    self.titleLabel.text = self.data[@"title"];
     self.titleLabel.font = [UIFont systemFontOfSize:18.0];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -112,7 +114,7 @@
         make.width.height.equalTo(14);
     }];
     self.yuanjiaxiaojiLabel = [[UILabel alloc] init];
-    self.yuanjiaxiaojiLabel.text = @"院级";
+    self.yuanjiaxiaojiLabel.text = self.data[@"yuanjixiaoji"];
     self.yuanjiaxiaojiLabel.font = [UIFont systemFontOfSize:13.0];
     self.yuanjiaxiaojiLabel.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
     [firstBackView addSubview:self.yuanjiaxiaojiLabel];
@@ -129,7 +131,7 @@
         make.width.height.equalTo(yuanjiyuanxiao);
     }];
     self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.text = @"3月30日周三10:00 -- 3月30日周三13:00";
+    self.timeLabel.text = self.data[@"time"];
     self.timeLabel.font = [UIFont systemFontOfSize:13.0];
     self.timeLabel.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
     [firstBackView addSubview:self.timeLabel];
@@ -146,7 +148,7 @@
         make.width.height.equalTo(yuanjiyuanxiao);
     }];
     self.placeLabel = [[UILabel alloc] init];
-    self.placeLabel.text = @"上方山森林公园";
+    self.placeLabel.text = self.data[@"place"];
     self.placeLabel.font = [UIFont systemFontOfSize:13.0];
     self.placeLabel.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
     [firstBackView addSubview:self.placeLabel];
@@ -163,7 +165,7 @@
         make.width.height.equalTo(yuanjiyuanxiao);
     }];
     self.costLabel = [[UILabel alloc] init];
-    self.costLabel.text = @"免费";
+    self.costLabel.text = self.data[@"cost"];
     self.costLabel.font = [UIFont systemFontOfSize:13.0];
     self.costLabel.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
     [firstBackView addSubview:self.costLabel];
@@ -186,7 +188,7 @@
     }];
     
     self.detailLabel = [[UILabel alloc] init];
-    self.detailLabel.text = @"最近天气好的很哪，我们踏青去。上方山百花节好！走出宿舍赏花去！上方山山上的露天“金光大佛”非常醒目，但 原先到金光大佛的索道现已停运，游客可沿步道拾级而上，上方山海拔仅92米，徒步登山就当锻炼身体啦。宋代的楞枷塔则是上方山的地标和最高点，还有治平 寺、石湖草堂、乾隆御道等古迹。此外，这里也有孔雀园、各类植物园，并设有专门的拓展及烧烤场地。导览：从位于吴越路的北段的公园主入口进园，右前方是古 迹治平寺和石湖草堂，如果往右直走可到石佛寺、范成大祠以及北入口。从主入口往左走可依次到金光大佛、孔雀园、拓展基地，沿途还会经过几个大草坪和植物园，继续再往前走便可登上上方山参观楞枷塔。";
+    self.detailLabel.text = self.data[@"detail"];
     self.detailLabel.font = [UIFont systemFontOfSize:15.0];
     self.detailLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
     self.detailLabel.numberOfLines = 0;
@@ -196,33 +198,33 @@
         make.left.equalTo(15);
         make.right.equalTo(-15);
         make.top.equalTo(20);
-        if (self.detailLabel.text.length >= 150) {
+        if (self.detailLabel.text.length >= maxNumberOfWords) {
             make.bottom.equalTo(-30);
         }
     }];
-    if (self.detailLabel.text.length >= 150) {
-        [secondBackView makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(190);
-        }];
-        UIButton *zhankai = [[UIButton alloc] init];
-        [zhankai setTitle:@"展开" forState:UIControlStateNormal];
-        [zhankai setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        zhankai.titleLabel.font = [UIFont systemFontOfSize:12.0];
-        zhankai.backgroundColor = [UIColor lightGrayColor];
-        [zhankai addTarget:self action:@selector(clickZhanKai:) forControlEvents:UIControlEventTouchUpInside];
-        [secondBackView addSubview:zhankai];
-        [zhankai makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(-15);
-            make.bottom.equalTo(-8);
-            make.size.equalTo(CGSizeMake(45, 20));
-        }];
-        [self makeView:zhankai toRoundCorner:10 withWidth:0 color:nil];
-
-    } else {
-        [secondBackView makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.detailLabel).offset(20);
-        }];
-    }
+//    if (self.detailLabel.text.length >= maxNumberOfWords) {
+//        [secondBackView makeConstraints:^(MASConstraintMaker *make) {
+//            make.height.equalTo(190);
+//        }];
+//        UIButton *zhankai = [[UIButton alloc] init];
+//        [zhankai setTitle:@"展开" forState:UIControlStateNormal];
+//        [zhankai setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        zhankai.titleLabel.font = [UIFont systemFontOfSize:12.0];
+//        zhankai.backgroundColor = [UIColor lightGrayColor];
+//        [zhankai addTarget:self action:@selector(clickZhanKai:) forControlEvents:UIControlEventTouchUpInside];
+//        [secondBackView addSubview:zhankai];
+//        [zhankai makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(-15);
+//            make.bottom.equalTo(-8);
+//            make.size.equalTo(CGSizeMake(45, 20));
+//        }];
+//        [self makeView:zhankai toRoundCorner:10 withWidth:0 color:nil];
+//
+//    } else {
+//        [secondBackView makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(self.detailLabel).offset(20);
+//        }];
+//    }
     [self.view layoutIfNeeded];
     
     CGFloat y = secondBackView.frame.origin.y + secondBackView.frame.size.height;
@@ -288,37 +290,36 @@
     
 }
 
-
-- (void)clickZhanKai:(UIButton *)sender
-{
-    sender.hidden = YES;
-    [self.detailLabel remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(15);
-        make.right.equalTo(-15);
-        make.top.equalTo(20);
-    }];
-    
-    [self.secondView remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.firstView.bottom).offset(17);
-        make.left.right.equalTo(0);
-        make.bottom.equalTo(self.detailLabel).offset(15);
-    }];
-    
-    [self.view layoutIfNeeded];
-    CGFloat y = self.secondView.frame.origin.y + self.secondView.frame.size.height;
-    
-    [self.underLine updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.scrollView).offset(y);
-    }];
-}
+//- (void)clickZhanKai:(UIButton *)sender
+//{
+//    sender.hidden = YES;
+//    [self.detailLabel remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(15);
+//        make.right.equalTo(-15);
+//        make.top.equalTo(20);
+//    }];
+//    
+//    [self.secondView remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.firstView.bottom).offset(17);
+//        make.left.right.equalTo(0);
+//        make.bottom.equalTo(self.detailLabel).offset(15);
+//    }];
+//    
+//    [self.view layoutIfNeeded];
+//    CGFloat y = self.secondView.frame.origin.y + self.secondView.frame.size.height;
+//    
+//    [self.underLine updateConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.scrollView).offset(y);
+//    }];
+//}
 
 #pragma mark - scrollview delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[kMainProjColor colorWithAlphaComponent:(scrollView.contentOffset.y - 0) / 100]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[kMainProjColor colorWithAlphaComponent:(scrollView.contentOffset.y - 100) / 10]] forBarMetrics:UIBarMetricsDefault];
     if (scrollView.contentOffset.y <= 0) {
-        
+        self.isReadyToMagnify = YES;
         CGFloat height = 273 - scrollView.contentOffset.y*0.8;
         CGFloat width = ScreenWidth / 273 * height;
 //        CGFloat x = (ScreenWidth-width)/2;
@@ -333,11 +334,14 @@
         }];
         
     } else {
-        [self.image remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(0);
-            make.width.equalTo(ScreenWidth);
-            make.height.equalTo(273);
-        }];
+        if (self.isReadyToMagnify) {
+            self.isReadyToMagnify = NO;
+            [self.image remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.right.equalTo(0);
+                make.width.equalTo(ScreenWidth);
+                make.height.equalTo(273);
+            }];
+        }
     }
 }
 

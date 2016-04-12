@@ -38,8 +38,8 @@
 
     
     //背景
-    UIImageView *backgroundImage = [[UIImageView alloc] init];
-    backgroundImage.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3];
+    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"denglu111.jpg"]];
+//    backgroundImage.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3];
     [self.view addSubview:backgroundImage];
     [backgroundImage makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -47,7 +47,7 @@
     
     //logo
     UIImageView *logoImage = [[UIImageView alloc] init];
-    logoImage.backgroundColor = [UIColor orangeColor];
+    logoImage.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:0.9];
     [self.view addSubview:logoImage];
     [logoImage makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(69);
@@ -59,7 +59,7 @@
     UITextField *account = [[UITextField alloc] init];
     account.borderStyle = UITextBorderStyleNone;
     account.placeholder = @"请输入学号";
-    account.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    account.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.9];
     [self.view addSubview:account];
     [account makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(17);
@@ -78,7 +78,7 @@
     UITextField *password = [[UITextField alloc] init];
     password.borderStyle = UITextBorderStyleNone;
     password.placeholder = @"请输入密码";
-    password.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    password.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.9];
     [self.view addSubview:password];
     [password makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(account);
@@ -101,7 +101,7 @@
     self.iamStudent.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
     [self.iamStudent setTitle:@"我是学生" forState:UIControlStateNormal];
     [self.iamStudent setTitleColor:[[UIColor blackColor] colorWithAlphaComponent:0.3] forState:UIControlStateNormal];
-    self.iamStudent.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    self.iamStudent.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.85];
     [self.view addSubview:self.iamStudent];
     [self.iamStudent makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(password.bottom).offset(10);
@@ -117,7 +117,7 @@
     self.iamManager.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
     [self.iamManager setTitle:@"我是管理员" forState:UIControlStateNormal];
     [self.iamManager setTitleColor:[[UIColor blackColor] colorWithAlphaComponent:0.3] forState:UIControlStateNormal];
-    self.iamManager.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    self.iamManager.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.85];
     [self.view addSubview:self.iamManager];
     [self.iamManager makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.iamStudent);
@@ -135,7 +135,7 @@
     loginButton.layer.cornerRadius = 4.0;
     [loginButton setTitle:@"登 录" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    loginButton.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:1];
+    loginButton.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:0.9];
     [self.view addSubview:loginButton];
     [loginButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(account);
@@ -151,21 +151,21 @@
     self.iamStudent.layer.borderWidth = 1.5;
     self.iamStudent.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
     [self.iamStudent setTitleColor:[[UIColor blackColor] colorWithAlphaComponent:0.3] forState:UIControlStateNormal];
-    self.iamStudent.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    self.iamStudent.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.85];
     
     self.iamManager.layer.borderWidth = 1.5;
     self.iamManager.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
     [self.iamManager setTitleColor:[[UIColor blackColor] colorWithAlphaComponent:0.3] forState:UIControlStateNormal];
-    self.iamManager.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    self.iamManager.backgroundColor = [kLightWhiteColor colorWithAlphaComponent:0.85];
 
     sender.layer.borderWidth = 0;
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    sender.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:0.6];
+    sender.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:0.9];
 }
 
 - (void)login
 {
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

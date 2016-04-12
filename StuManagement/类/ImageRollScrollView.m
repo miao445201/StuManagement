@@ -107,7 +107,6 @@
     }
     point = self.scrollView.contentOffset;
     [self.scrollView setContentOffset:CGPointMake(point.x + pageWidth, point.y) animated:YES];
-
     
     if (self.pageControl.currentPage == self.pageControl.numberOfPages - 1) {
         self.pageControl.currentPage = 0;
@@ -115,13 +114,18 @@
         self.pageControl.currentPage++;
     }
     self.currentPage = self.pageControl.currentPage;
-    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.scrollTimer invalidate];
     self.scrollTimer = nil;
+    CGFloat pageWidth = self.frame.size.width;
+    CGPoint point = scrollView.contentOffset;
+    if (point.x == pageWidth * (self.images.count + 1)) {
+        [self.scrollView setContentOffset:CGPointMake(pageWidth, point.y)];
+    }
+    
 }
 
 
