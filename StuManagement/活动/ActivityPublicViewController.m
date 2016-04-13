@@ -8,7 +8,7 @@
 
 #import "ActivityPublicViewController.h"
 
-@interface ActivityPublicViewController () <UITextViewDelegate>
+@interface ActivityPublicViewController () <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *image;
@@ -22,9 +22,110 @@
 @property (nonatomic) CGFloat keyboardHeight;
 @property (nonatomic) CGFloat lastOffsetY;
 
+@property (nonatomic, strong) UIView *popView;
+@property (nonatomic, strong) UIView *backgroundView;
+
+@property (nonatomic, strong) UIDatePicker *datePicker;
 @end
 
 @implementation ActivityPublicViewController
+
+- (UIDatePicker *)datePicker
+{
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 300)];
+        _datePicker.backgroundColor = [UIColor whiteColor];
+        _datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:60];
+        NSLocale *chineseLocale = [NSLocale localeWithLocaleIdentifier:@"zh_cn"];   //创建一个中文的地区对象
+        [_datePicker setLocale:chineseLocale];  //将这个地区对象给UIDatePicker设置上
+        [_datePicker addTarget:self action:@selector(changeTime:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _datePicker;
+}
+
+- (UIView *)backgroundView
+{
+    if (!_backgroundView) {
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBackground)];
+        gesture.numberOfTapsRequired = 1;
+        [_backgroundView addGestureRecognizer:gesture];
+    }
+    return _backgroundView;
+}
+
+- (UIView *)popView
+{
+    if (!_popView) {
+        _popView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 160)];
+        _popView.backgroundColor = [UIColor whiteColor];
+        _popView.clipsToBounds = YES;
+    }
+    return _popView;
+}
+
+- (void)initPopViewWithType:(NSInteger)type
+{
+    [self.view addSubview:self.popView];
+    NSArray *array = type == 1 ? @[@"院级", @"校级", @"取消"] : @[@"拍照", @"相册选取", @"取消"];
+    CGFloat gap = 6;
+    UIButton *button1 = [[UIButton alloc] init];
+    button1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button1 setTitle:array[0] forState:UIControlStateNormal];
+    [button1 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button1.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button1];
+    [button1 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(gap);
+        make.right.equalTo(-gap);
+    }];
+    button1.tag = 1;
+    [button1 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button2 = [[UIButton alloc] init];
+    button2.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button2 setTitle:array[1] forState:UIControlStateNormal];
+    [button2 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button2.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button2];
+    [button2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(gap);
+        make.right.equalTo(-gap);
+
+    }];
+    button2.tag = 2;
+    [button2 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button3 = [[UIButton alloc] init];
+    button3.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button3 setTitle:array[2] forState:UIControlStateNormal];
+    [button3 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button3.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button3];
+    [button3 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(gap);
+        make.right.equalTo(-gap);
+        make.bottom.equalTo(-gap);
+    }];
+    button3.tag = 3;
+    [button3 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [button1 makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(button2.top).offset(-gap);
+    }];
+    
+    [button2 makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(button1);
+        make.top.equalTo(button1.bottom).offset(gap);
+        make.bottom.equalTo(button3.top).offset(-gap);
+    }];
+    
+    [button3 makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(button1);
+        make.top.equalTo(button2.bottom).offset(gap);
+    }];
+}
 
 - (instancetype)init
 {
@@ -64,8 +165,10 @@
         make.edges.equalTo(self.view);
         make.width.equalTo(self.view);
     }];
+    scrollView.userInteractionEnabled = YES;
     
     self.image = [[UIImageView alloc] init];
+    self.image.tag = 0;
     [self.image setImage:[UIImage imageNamed:@"tianjiahuodong"]];
 //    [self.image loadImageWithUrl:@"http://i03.pic.sogou.com/cbfb092dd104d538"];
     [scrollView addSubview:self.image];
@@ -74,6 +177,11 @@
         make.width.equalTo(ScreenWidth);
         make.height.equalTo(self.image.width).multipliedBy(0.7);
     }];
+    self.image.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popSelectView:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.image addGestureRecognizer:tapGesture];
+    
     
     UIView *firstView = [[UIView alloc] init];
     firstView.backgroundColor = [UIColor whiteColor];
@@ -126,6 +234,11 @@
         make.top.equalTo(firstView.bottom).offset(15);
         make.height.equalTo(50);
     }];
+    secondView.tag = 1;
+    UITapGestureRecognizer *dateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popDatePicker:)];
+    dateGesture.numberOfTapsRequired = 1;
+    [secondView addGestureRecognizer:dateGesture];
+    
     UIImageView *image222 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shijian"]];
     [secondView addSubview:image222];
     [image222 makeConstraints:^(MASConstraintMaker *make) {
@@ -172,6 +285,10 @@
         make.top.equalTo(secondView.bottom).offset(1);
         make.height.equalTo(50);
     }];
+    secondView2.tag = 2;
+    UITapGestureRecognizer *dateGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popDatePicker:)];
+    dateGesture2.numberOfTapsRequired = 1;
+    [secondView2 addGestureRecognizer:dateGesture2];
 
     UIImageView *image333 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shijianjieshu"]];
     [secondView2 addSubview:image333];
@@ -250,7 +367,7 @@
         make.width.height.equalTo(jiantou1);
     }];
 
-    
+
     
     
     //4444444
@@ -296,6 +413,7 @@
 
     //5555555
     UIView *fiveView = [[UIView alloc] init];
+    fiveView.tag = 1;
     fiveView.backgroundColor = [UIColor whiteColor];
     [scrollView addSubview:fiveView];
     [fiveView makeConstraints:^(MASConstraintMaker *make) {
@@ -303,6 +421,10 @@
         make.top.equalTo(fourthView.bottom).offset(12);
         make.height.equalTo(50);
     }];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popSelectView:)];
+    gesture.numberOfTapsRequired = 1;
+    [fiveView addGestureRecognizer:gesture];
+    
     UIImageView *image666 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yuanjiyuanxiao"]];
     [fiveView addSubview:image666];
     [image666 makeConstraints:^(MASConstraintMaker *make) {
@@ -335,10 +457,10 @@
         make.right.equalTo(jiantou1);
         make.width.height.equalTo(jiantou1);
     }];
-
+    [self.view layoutIfNeeded];
     
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(fiveView).offset(50);
+        make.bottom.equalTo(fiveView).offset(100);
     }];
     
 }
@@ -346,6 +468,98 @@
 - (void)publicActivity
 {
     
+}
+
+- (void)clickBackground
+{
+    CGRect rect = self.popView.frame;
+    CGRect rect1 = self.datePicker.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.popView setFrame:CGRectMake(0, ScreenHeight, rect.size.width, rect.size.height)];
+        [self.datePicker setFrame:CGRectMake(0, ScreenHeight, rect1.size.width, rect1.size.height)];
+        self.backgroundView.alpha = 0;
+    } completion:^(BOOL isfinished) {
+        if (isfinished) {
+            [self.popView removeFromSuperview];
+            [self.datePicker removeFromSuperview];
+            [self.backgroundView removeFromSuperview];
+        }
+    }];
+
+}
+
+- (void)popSelectView:(UITapGestureRecognizer *)gesture
+{
+    self.backgroundView.alpha = 0;
+    [self.view addSubview:self.backgroundView];
+    [self initPopViewWithType:gesture.view.tag];
+    CGRect rect = self.popView.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backgroundView.alpha = 1;
+        [self.popView setFrame:CGRectMake(0, ScreenHeight - rect.size.height - 64, rect.size.width, rect.size.height)];
+    }];
+}
+
+- (void)popDatePicker:(UITapGestureRecognizer *)gesture
+{
+    self.backgroundView.alpha = 0;
+    self.datePicker.tag = gesture.view.tag;
+    [self.view addSubview:self.backgroundView];
+    [self.view addSubview:self.datePicker];
+    CGRect rect = self.datePicker.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backgroundView.alpha = 1;
+        [self.datePicker setFrame:CGRectMake(0, ScreenHeight - rect.size.height - 64, rect.size.width, rect.size.height)];
+    }];
+}
+
+- (void)clickButton:(UIButton *)sender
+{
+    [self clickBackground];
+    switch (sender.tag) {
+        case 1:
+            if ([sender.titleLabel.text isEqualToString:@"拍照"]) {
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                }
+                imagePicker.delegate = self;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            } else {        //院级
+                self.typeLabel.text = @"院级";
+            }
+            break;
+        case 2:
+            if ([sender.titleLabel.text isEqualToString:@"相册选取"]) {
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                imagePicker.delegate = self;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            } else {        //校级
+                self.typeLabel.text = @"校级";
+            }
+            break;
+        case 3:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)changeTime:(UIDatePicker *)sender
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate *nowDate = [sender date];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *nowString = [dateFormatter stringFromDate:nowDate];
+
+    if (sender.tag == 1) {
+        self.startTimeLabel.text = nowString;
+    } else {
+        self.endTimeLabel.text = nowString;
+    }
 }
 
 //添加收回键盘的手势
@@ -460,6 +674,12 @@
     }
 }
 
-
+#pragma mark - UIImagePicker
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.image.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

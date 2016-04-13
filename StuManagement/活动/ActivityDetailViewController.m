@@ -12,6 +12,8 @@ const NSInteger maxNumberOfWords = 150;
 
 @interface ActivityDetailViewController () <UIScrollViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *comments;
+
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -33,6 +35,9 @@ const NSInteger maxNumberOfWords = 150;
 {
     if (self = [super init]) {
         self.title = @"活动详情";
+        self.comments = [@[ @{ @"userName":@"Lucifer", @"content":@"学校就好，花花草草还有中央公园", @"time":@"2016-03-22 20:46"},
+                            @{ @"userName":@"李青", @"content":@"凑个热闹", @"time":@"2016-03-22 19:36" },
+                            @{ @"userName":@"张丹", @"content":@"春光灿烂", @"time":@"2016-03-22 18:42" } ] mutableCopy];
     }
     return self;
 }
@@ -47,7 +52,11 @@ const NSInteger maxNumberOfWords = 150;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[kMainProjColor colorWithAlphaComponent:0]] forBarMetrics:UIBarMetricsDefault];
+    if (self.scrollView.contentOffset.y >= 100) {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:kMainProjColor] forBarMetrics:UIBarMetricsDefault];
+    } else {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[kMainProjColor colorWithAlphaComponent:0]] forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -177,6 +186,9 @@ const NSInteger maxNumberOfWords = 150;
         make.bottom.equalTo(self.costLabel.bottom).offset(17);
     }];
     
+    
+    
+    //2222222222
     UIView *secondBackView = [[UIView alloc] init];
     self.secondView = secondBackView;
     secondBackView.backgroundColor = [UIColor whiteColor];
@@ -225,9 +237,99 @@ const NSInteger maxNumberOfWords = 150;
 //            make.bottom.equalTo(self.detailLabel).offset(20);
 //        }];
 //    }
+    
+    
+    //3333333333
+    UIView *thirdView = [[UIView alloc] init];
+    thirdView.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:thirdView];
+    [thirdView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(secondBackView.bottom).offset(17);
+        make.left.right.equalTo(0);
+        make.height.equalTo(50);
+    }];
+    UILabel *label111 = [[UILabel alloc] init];
+    label111.text = @"最新评论";
+    label111.backgroundColor = [UIColor whiteColor];
+    label111.font = [UIFont systemFontOfSize:16.0];
+    [thirdView addSubview:label111];
+    [label111 makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(0);
+        make.left.equalTo(self.titleLabel);
+    }];
+    
+    //4444444444
+    UIView *lastView = nil;
+    for (int i = 0; i < self.comments.count; i++) {
+        UIView *newView = [[UIView alloc] init];
+        newView.backgroundColor = [UIColor whiteColor];
+        [scrollView addSubview:newView];
+        [newView makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(80);
+            make.left.right.equalTo(0);
+        }];
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [newView addSubview:line];
+        [line makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(15);
+            make.right.bottom.equalTo(0);
+            make.height.equalTo(0.5);
+        }];
+        UILabel *userName = [[UILabel alloc] init];
+        userName.text = self.comments[i][@"userName"];
+        userName.font = [UIFont systemFontOfSize:16.0];
+        [newView addSubview:userName];
+        [userName makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(newView.centerY).offset(-8);
+            make.left.equalTo(15);
+        }];
+        UILabel *content = [[UILabel alloc] init];
+        content.text = self.comments[i][@"content"];
+        content.font = [UIFont systemFontOfSize:15.0];
+        [newView addSubview:content];
+        [content makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(newView.centerY).offset(8);
+            make.left.equalTo(15);
+        }];
+        UILabel *time = [[UILabel alloc] init];
+        time.text = self.comments[i][@"time"];
+        time.font = [UIFont systemFontOfSize:13.0];
+        time.textColor = [UIColor lightGrayColor];
+        time.textAlignment = NSTextAlignmentRight;
+        [newView addSubview:time];
+        [time makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(userName);
+            make.right.equalTo(-15);
+        }];
+
+        if (!lastView) {
+            [newView makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(thirdView.bottom).offset(1);
+            }];
+        } else {
+            [newView makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(lastView.bottom);
+            }];
+        }
+        lastView = newView;
+    }
+    UIButton *moreComment = [[UIButton alloc] init];
+    moreComment.backgroundColor = [UIColor whiteColor];
+    [moreComment setTitle:@"更多评论" forState:UIControlStateNormal];
+    [moreComment setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    moreComment.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [scrollView addSubview:moreComment];
+    [moreComment makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lastView.bottom);
+        make.left.right.equalTo(0);
+        make.height.equalTo(50);
+    }];
+    [moreComment addTarget:self action:@selector(clickMoreComment) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view layoutIfNeeded];
     
-    CGFloat y = secondBackView.frame.origin.y + secondBackView.frame.size.height;
+    CGFloat y = moreComment.frame.origin.y + moreComment.frame.size.height;
     
     UIView *view = [[UIView alloc] init];
     self.underLine = view;
@@ -268,8 +370,10 @@ const NSInteger maxNumberOfWords = 150;
         make.top.bottom.left.equalTo(0);
         make.width.equalTo(fixedView.width).multipliedBy(0.333);
     }];
+    [commentButton addTarget:self action:@selector(clickComment) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *likeButton = [[UIButton alloc] init];
+    likeButton.selected = NO;
     [likeButton setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
     [fixedView addSubview:likeButton];
     [likeButton makeConstraints:^(MASConstraintMaker *make) {
@@ -277,8 +381,10 @@ const NSInteger maxNumberOfWords = 150;
         make.left.equalTo(commentButton.right);
         make.width.equalTo(fixedView).multipliedBy(0.34);
     }];
-    
+    [likeButton addTarget:self action:@selector(clickLike:) forControlEvents:UIControlEventTouchUpInside];
+
     UIButton *joinButton = [[UIButton alloc] init];
+    joinButton.selected = NO;
     [joinButton setTitle:@"立即参加" forState:UIControlStateNormal];
     [joinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [joinButton setBackgroundColor:kMainProjColor];
@@ -287,7 +393,50 @@ const NSInteger maxNumberOfWords = 150;
         make.top.bottom.right.equalTo(0);
         make.left.equalTo(likeButton.right);
     }];
-    
+    [joinButton addTarget:self action:@selector(clickJoin:) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+- (void)clickMoreComment
+{
+    ActivityMoreCommentController *controller = [[ActivityMoreCommentController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)clickComment
+{
+    ActivityCommentController *controller = [[ActivityCommentController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)clickLike:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [sender setImage:[UIImage imageNamed:@"shoucangfilled"] forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"收藏成功" imageName:@"success.png"];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"取消收藏" imageName:@"error.png"];
+    }
+
+}
+
+- (void)clickJoin:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [sender setTitle:@"取消参加" forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor orangeColor]];
+        [self showHUDwithMessage:@"参加成功" imageName:@"success.png"];
+
+    } else {
+        [sender setTitle:@"立即参加" forState:UIControlStateNormal];
+        [sender setBackgroundColor:kMainProjColor];
+        [self showHUDwithMessage:@"取消参加" imageName:@"error.png"];
+
+    }
+
 }
 
 //- (void)clickZhanKai:(UIButton *)sender
@@ -343,6 +492,77 @@ const NSInteger maxNumberOfWords = 150;
             }];
         }
     }
+}
+
+@end
+
+
+
+
+
+@interface ActivityMoreCommentController ()
+
+
+@end
+
+@implementation ActivityMoreCommentController
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.title = @"更多评论";
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+}
+
+@end
+
+
+
+
+@interface ActivityCommentController () <UITextViewDelegate>
+
+@property (nonatomic, strong) UITextView *textView;
+
+@end
+
+@implementation ActivityCommentController
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.title = @"评论";
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self loadSubViews];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+}
+
+- (void)loadSubViews
+{
+    
 }
 
 @end

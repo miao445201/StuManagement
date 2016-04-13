@@ -13,3 +13,11 @@
 @property (nonatomic, strong) NSDictionary *data;
 
 @end
+
+@interface ActivityMoreCommentController : MIYBasisViewController
+
+@end
+
+@interface ActivityCommentController : MIYBasisViewController
+
+@end

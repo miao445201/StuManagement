@@ -19,5 +19,6 @@
 - (UIView *)addLineToSuperView:(UIView *)superView underView:(UIView *)view withGap:(CGFloat)gap;
 - (void)makeView:(UIView *)view toRoundCorner:(CGFloat)radius withWidth:(CGFloat)width color:(UIColor *)color;
 - (UIImage *)imageWithBgColor:(UIColor *)color;
+- (void)showHUDwithMessage:(NSString *)message imageName:(NSString *)imageName;
 
 @end

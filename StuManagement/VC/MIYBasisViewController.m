@@ -121,4 +121,22 @@
     return image;
 }
 
+- (void)showHUDwithMessage:(NSString *)message imageName:(NSString *)imageName
+{
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+    MBProgressHUD *progressHUD = [[MBProgressHUD alloc] initWithWindow:window];
+    [window addSubview:progressHUD];
+    [window bringSubviewToFront:progressHUD];
+    progressHUD.userInteractionEnabled = NO;
+    
+    if (imageName) {
+        progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+        progressHUD.mode = MBProgressHUDModeCustomView;
+    }
+    
+    progressHUD.labelText = message;
+    [progressHUD show:YES];
+    [progressHUD hide:YES afterDelay:0.8];
+}
+
 @end

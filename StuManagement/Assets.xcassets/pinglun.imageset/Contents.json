@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Map Editing.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "评论.png",
       "scale" : "2x"
     },
     {
