@@ -467,7 +467,8 @@
 
 - (void)publicActivity
 {
-    
+    [self showHUDwithMessage:@"发布成功" imageName:@"success.png"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)clickBackground

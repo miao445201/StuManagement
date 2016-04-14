@@ -400,6 +400,7 @@ const NSInteger maxNumberOfWords = 150;
 - (void)clickMoreComment
 {
     ActivityMoreCommentController *controller = [[ActivityMoreCommentController alloc] init];
+    controller.comments = [self.comments mutableCopy];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -502,7 +503,6 @@ const NSInteger maxNumberOfWords = 150;
 
 @interface ActivityMoreCommentController ()
 
-
 @end
 
 @implementation ActivityMoreCommentController
@@ -518,12 +518,91 @@ const NSInteger maxNumberOfWords = 150;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self loadSubViews];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+}
+
+- (void)loadSubViews
+{
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.backgroundColor = kLightWhiteColor;
+    [self.view addSubview:scrollView];
+    [scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+        make.width.equalTo(self.view);
+    }];
+    
+    UIView *lastView = nil;
+    for (int i = 0; i < self.comments.count; i++) {
+        UIView *newView = [[UIView alloc] init];
+        newView.backgroundColor = [UIColor whiteColor];
+        [scrollView addSubview:newView];
+        [newView makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(80);
+            make.left.right.equalTo(0);
+            make.width.equalTo(ScreenWidth);
+        }];
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [newView addSubview:line];
+        [line makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(15);
+            make.right.bottom.equalTo(0);
+            make.height.equalTo(0.5);
+        }];
+        UILabel *userName = [[UILabel alloc] init];
+        userName.text = self.comments[i][@"userName"];
+        userName.font = [UIFont systemFontOfSize:16.0];
+        [newView addSubview:userName];
+        [userName makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(newView.centerY).offset(-8);
+            make.left.equalTo(15);
+        }];
+        UILabel *content = [[UILabel alloc] init];
+        content.text = self.comments[i][@"content"];
+        content.font = [UIFont systemFontOfSize:15.0];
+        [newView addSubview:content];
+        [content makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(newView.centerY).offset(8);
+            make.left.equalTo(15);
+        }];
+        UILabel *time = [[UILabel alloc] init];
+        time.text = self.comments[i][@"time"];
+        time.font = [UIFont systemFontOfSize:13.0];
+        time.textColor = [UIColor lightGrayColor];
+        time.textAlignment = NSTextAlignmentRight;
+        [newView addSubview:time];
+        [time makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(userName);
+            make.right.equalTo(-15);
+        }];
+        
+        if (!lastView) {
+            [newView makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(0);
+            }];
+        } else {
+            [newView makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(lastView.bottom);
+            }];
+        }
+        lastView = newView;
+    }
+    
+    [self.view layoutIfNeeded];
+    CGFloat y = lastView.frame.origin.y + lastView.frame.size.height;
+    [scrollView makeConstraints:^(MASConstraintMaker *make) {
+        if (y < ScreenHeight - 50 - 64) {
+            make.bottom.equalTo(lastView).offset(ScreenHeight-y-64+1);
+        } else {
+            make.bottom.equalTo(lastView).offset(50);
+        }
+    }];
     
 }
 
@@ -551,6 +630,11 @@ const NSInteger maxNumberOfWords = 150;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = kLightWhiteColor;
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(sendComment)];
+    rightItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = rightItem;
+
     [self loadSubViews];
 }
 
@@ -560,9 +644,64 @@ const NSInteger maxNumberOfWords = 150;
     
 }
 
+- (void)sendComment
+{
+    //send comment
+    [self showHUDwithMessage:@"评论成功" imageName:@"success.png"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)loadSubViews
 {
+    self.textView = [[UITextView alloc] init];
+    self.textView.font = [UIFont systemFontOfSize:14.0];
+    self.textView.text = @"评论内容...";
+    self.textView.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
+    self.textView.delegate = self;
+    [self.view addSubview:self.textView];
+    [self.textView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(10);
+        make.right.equalTo(-10);
+        make.height.equalTo(200);
+    }];
     
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - text view delegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView       //开始输入前
+{
+    //    [self resetScrollViewOffsetByKeyboardHeight:self.keyboardHeight];       //点击textview改变offset
+    
+    if ([textView.text isEqualToString:@"评论内容..."]) {
+        textView.text = @"";
+        textView.textColor = kMainBlackColor;
+    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text      //输入中
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];        //当输入回车时，去除第一响应者
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView        //结束输入后
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"评论内容...";
+        textView.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
+    }
+}
+
 
 @end

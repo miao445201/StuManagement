@@ -16,6 +16,8 @@
 
 @interface ActivityMoreCommentController : MIYBasisViewController
 
+@property (nonatomic, strong) NSMutableArray *comments;
+
 @end
 
 @interface ActivityCommentController : MIYBasisViewController

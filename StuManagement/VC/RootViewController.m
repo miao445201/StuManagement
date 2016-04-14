@@ -35,17 +35,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     LoginViewController *loginController = [[LoginViewController alloc] init];
-    [self presentViewController:loginController animated:NO completion:nil];
-    
-    
-    [self setNavigationTitle];
-    self.navigationItem.leftBarButtonItem = nil;
-//    self.navigationController.navigationBar.barTintColor = kMainProjColor;
-    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:kMainProjColor] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[self imageWithBgColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0]]];
+    [self presentViewController:loginController animated:NO completion:^{
+        [self setNavigationTitle];
+        self.navigationItem.leftBarButtonItem = nil;
+        //    self.navigationController.navigationBar.barTintColor = kMainProjColor;
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:kMainProjColor] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:[self imageWithBgColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0]]];
+        [self loadSubViews];
+    }];
 
-    [self initSubViews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +72,7 @@
 
 
 
-- (void)initSubViews
+- (void)loadSubViews
 {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     [self.view addSubview:scrollView];
