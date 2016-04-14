@@ -8,14 +8,18 @@
 
 #import "CreateOrgViewController.h"
 
-@interface CreateOrgViewController () <UITextViewDelegate, UIScrollViewDelegate>
+@interface CreateOrgViewController () <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UITextField *nameTextField;
-@property (nonatomic, strong) UIButton *logoImageButton;
+@property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UITextView *introductionTextView;
 @property (nonatomic, strong) UITextView *noticeTextView;
+@property (nonatomic, strong) UILabel *typeLabel;
 @property (nonatomic) CGFloat keyboardHeight;
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, strong) UIView *popView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
@@ -24,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = kLightWhiteColor;
     [self setRightNaviItemWithTitle:@"提交申请" OrImageName:nil];
     [self loadSubViews];
     [self addTapGestureToRemoveKeyboard];
@@ -55,43 +60,140 @@
 
 - (void)loadSubViews
 {
-    self.scrollView = [[UIScrollView alloc] init];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    self.scrollView = scrollView;
     [self.view addSubview:self.scrollView];
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
         make.width.equalTo(self.view);
     }];
 
+    self.image = [[UIImageView alloc] init];
+    self.image.tag = 0;
+    [self.image setImage:[UIImage imageNamed:@"tianjiashetuan"]];
+    //    [self.image loadImageWithUrl:@"http://i03.pic.sogou.com/cbfb092dd104d538"];
+    [scrollView addSubview:self.image];
+    [self.image makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(0);
+        make.width.equalTo(ScreenWidth);
+        make.height.equalTo(self.image.width).multipliedBy(0.7);
+    }];
+    self.image.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popSelectView:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [self.image addGestureRecognizer:tapGesture];
+
+    UIView *firstView = [[UIView alloc] init];
+    firstView.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:firstView];
+    [firstView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.image.bottom);
+        make.left.right.equalTo(0);
+        make.height.equalTo(200);
+    }];
+    
+    UIImageView *image111 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"huodongmingcheng"]];
+    [firstView addSubview:image111];
+    [image111 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(12);
+        make.width.height.equalTo(20);
+        make.centerY.equalTo(firstView.top).offset(25);
+    }];
+    
     self.nameTextField = [[UITextField alloc] init];
-    UILabel *nameLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 80, 43)];
-    nameLeftLabel.text = @"社团名称:";
-    nameLeftLabel.textColor = [UIColor lightGrayColor];
-    nameLeftLabel.textAlignment = NSTextAlignmentCenter;
-    self.nameTextField.leftView = nameLeftLabel;
-    self.nameTextField.leftViewMode = UITextFieldViewModeAlways;
-    [self.scrollView addSubview:self.nameTextField];
-    
-    UILabel *logoLabel = [[UILabel alloc] init];
-    logoLabel.text = @"社团logo:";
-    logoLabel.textColor = [UIColor lightGrayColor];
-    logoLabel.textAlignment = NSTextAlignmentCenter;
-    [self.scrollView addSubview:logoLabel];
-    
-    self.logoImageButton = [[UIButton alloc] init];
-    self.logoImageButton.backgroundColor = [UIColor magentaColor];
-    [self.logoImageButton setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-    [self.scrollView addSubview:self.logoImageButton];
-    
-    UILabel *introductionLabel = [[UILabel alloc] init];
-    introductionLabel.text = @"社团介绍:";
-    introductionLabel.textColor = [UIColor lightGrayColor];
-    introductionLabel.textAlignment = NSTextAlignmentCenter;
-    [self.scrollView addSubview:introductionLabel];
-    
+    self.nameTextField.placeholder = @"输入社团名称";
+    self.nameTextField.borderStyle = UITextBorderStyleNone;
+    self.nameTextField.font = [UIFont systemFontOfSize:15.0];
+    [scrollView addSubview:self.nameTextField];
+    [self.nameTextField makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(firstView);
+        make.left.equalTo(image111.right).offset(10);
+        make.height.equalTo(55);
+    }];
+
+    [self addLineToSuperView:firstView underView:self.nameTextField withGap:0];
+
     self.introductionTextView = [[UITextView alloc] init];
-    self.introductionTextView.backgroundColor = [UIColor whiteColor];
     self.introductionTextView.delegate = self;
-    [self.scrollView addSubview:self.introductionTextView];
+    self.introductionTextView.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
+    self.introductionTextView.text = @"填写社团描述,让更多的人参加社团...";
+    self.introductionTextView.tag = 1;
+    self.introductionTextView.font = [UIFont systemFontOfSize:15.0];
+    [self.introductionTextView setTextContainerInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [scrollView addSubview:self.introductionTextView];
+    [self.introductionTextView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.nameTextField.bottom).offset(1);
+        make.left.right.bottom.equalTo(firstView);
+    }];
+
+    self.noticeTextView = [[UITextView alloc] init];
+    self.noticeTextView.backgroundColor = [UIColor whiteColor];
+    self.noticeTextView.delegate = self;
+    self.noticeTextView.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
+    self.noticeTextView.text = @"填写社团公告...";
+    self.noticeTextView.tag = 2;
+    self.noticeTextView.font = [UIFont systemFontOfSize:15.0];
+    [self.noticeTextView setTextContainerInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [scrollView addSubview:self.noticeTextView];
+    [self.noticeTextView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(firstView.bottom).offset(15);
+        make.height.equalTo(120);
+    }];
+    
+    //5555555
+    UIView *fiveView = [[UIView alloc] init];
+    fiveView.tag = 1;
+    fiveView.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:fiveView];
+    [fiveView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(self.noticeTextView.bottom).offset(12);
+        make.height.equalTo(50);
+    }];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popSelectView:)];
+    gesture.numberOfTapsRequired = 1;
+    [fiveView addGestureRecognizer:gesture];
+    
+    UIImageView *image666 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yuanjiyuanxiao"]];
+    [fiveView addSubview:image666];
+    [image666 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(image111);
+        make.width.height.equalTo(image111);
+        make.centerY.equalTo(0);
+    }];
+    
+    UILabel *cost = [[UILabel alloc] init];
+    cost.text = @"社团类别";
+    cost.font = [UIFont systemFontOfSize:15.0];
+    [fiveView addSubview:cost];
+    [cost makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(image666.right).offset(10);
+        make.centerY.equalTo(0);
+    }];
+    self.typeLabel = [[UILabel alloc] init];
+    self.typeLabel.font = [UIFont systemFontOfSize:14.0];
+    self.typeLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
+    self.typeLabel.text = @"院级";
+    [fiveView addSubview:self.typeLabel];
+    [self.typeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-28);
+        make.centerY.equalTo(0);
+    }];
+    UIImageView *jiantou5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"jiantouxia"]];
+    [fiveView addSubview:jiantou5];
+    [jiantou5 makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(0);
+        make.right.equalTo(-8);
+        make.width.height.equalTo(15);
+    }];
+    [self.view layoutIfNeeded];
+    
+    [scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(fiveView).offset(100);
+    }];
+
+    /*
     
     UILabel *noticeLabel = [[UILabel alloc] init];
     noticeLabel.text = @"公告:";
@@ -211,8 +313,154 @@
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(whetherPremium).offset(80);
     }];
-
+     */
 }
+
+- (UIView *)popView
+{
+    if (!_popView) {
+        _popView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 160)];
+        _popView.backgroundColor = [UIColor whiteColor];
+        _popView.clipsToBounds = YES;
+    }
+    return _popView;
+}
+
+- (UIView *)backgroundView
+{
+    if (!_backgroundView) {
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBackground)];
+        gesture.numberOfTapsRequired = 1;
+        [_backgroundView addGestureRecognizer:gesture];
+    }
+    return _backgroundView;
+}
+
+- (void)initPopViewWithType:(NSInteger)type
+{
+    [self.view addSubview:self.popView];
+    NSArray *array = type == 1 ? @[@"院级", @"校级", @"取消"] : @[@"拍照", @"相册选取", @"取消"];
+    CGFloat gap = 6;
+    UIButton *button1 = [[UIButton alloc] init];
+    button1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button1 setTitle:array[0] forState:UIControlStateNormal];
+    [button1 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button1.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button1];
+    [button1 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(gap);
+        make.right.equalTo(-gap);
+    }];
+    button1.tag = 1;
+    [button1 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button2 = [[UIButton alloc] init];
+    button2.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button2 setTitle:array[1] forState:UIControlStateNormal];
+    [button2 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button2.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button2];
+    [button2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(gap);
+        make.right.equalTo(-gap);
+        
+    }];
+    button2.tag = 2;
+    [button2 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button3 = [[UIButton alloc] init];
+    button3.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [button3 setTitle:array[2] forState:UIControlStateNormal];
+    [button3 setTitleColor:kMainBlackColor forState:UIControlStateNormal];
+    button3.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [self.popView addSubview:button3];
+    [button3 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(gap);
+        make.right.equalTo(-gap);
+        make.bottom.equalTo(-gap);
+    }];
+    button3.tag = 3;
+    [button3 addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [button1 makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(button2.top).offset(-gap);
+    }];
+    
+    [button2 makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(button1);
+        make.top.equalTo(button1.bottom).offset(gap);
+        make.bottom.equalTo(button3.top).offset(-gap);
+    }];
+    
+    [button3 makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(button1);
+        make.top.equalTo(button2.bottom).offset(gap);
+    }];
+}
+
+- (void)clickBackground
+{
+    CGRect rect = self.popView.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.popView setFrame:CGRectMake(0, ScreenHeight, rect.size.width, rect.size.height)];
+        self.backgroundView.alpha = 0;
+    } completion:^(BOOL isfinished) {
+        if (isfinished) {
+            [self.popView removeFromSuperview];
+            [self.backgroundView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)clickButton:(UIButton *)sender
+{
+    [self clickBackground];
+    switch (sender.tag) {
+        case 1:
+            if ([sender.titleLabel.text isEqualToString:@"拍照"]) {
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                }
+                imagePicker.delegate = self;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            } else {        //院级
+                self.typeLabel.text = @"院级";
+            }
+            break;
+        case 2:
+            if ([sender.titleLabel.text isEqualToString:@"相册选取"]) {
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                imagePicker.delegate = self;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            } else {        //校级
+                self.typeLabel.text = @"校级";
+            }
+            break;
+        case 3:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)popSelectView:(UITapGestureRecognizer *)gesture
+{
+    self.backgroundView.alpha = 0;
+    [self.view addSubview:self.backgroundView];
+    [self initPopViewWithType:gesture.view.tag];
+    CGRect rect = self.popView.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backgroundView.alpha = 1;
+        [self.popView setFrame:CGRectMake(0, ScreenHeight - rect.size.height - 64, rect.size.width, rect.size.height)];
+    }];
+}
+
 
 //根据键盘高度重置把view往上移
 - (void)setViewMovedUp:(BOOL)movedUp
@@ -251,6 +499,7 @@
 //收回键盘手势的target
 - (void)touchScrollView
 {
+    [self.nameTextField resignFirstResponder];
     [self.introductionTextView resignFirstResponder];
     [self.noticeTextView resignFirstResponder];
 }
@@ -287,7 +536,19 @@
 #pragma mark - UITextView Delegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView       //开始输入前
 {
-//    [self setViewMovedUp:YES];       //点击textview改变offset
+    //    [self resetScrollViewOffsetByKeyboardHeight:self.keyboardHeight];       //点击textview改变offset
+    if (textView.tag == 1) {
+        if ([textView.text isEqualToString:@"填写社团描述,让更多的人参加社团..."]) {
+            textView.text = @"";
+            textView.textColor = kMainBlackColor;
+        }
+    } else {
+        if ([textView.text isEqualToString:@"填写社团公告..."]) {
+            textView.text = @"";
+            textView.textColor = kMainBlackColor;
+        }
+
+    }
     return YES;
 }
 
@@ -295,29 +556,31 @@
 {
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];        //当输入回车时，去除第一响应者
+        
         return NO;
     }
     
     return YES;
 }
 
-- (void)showHUDwithMessage:(NSString *)message imageName:(NSString *)imageName
+- (void)textViewDidEndEditing:(UITextView *)textView        //结束输入后
 {
-    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
-    MBProgressHUD *progressHUD = [[MBProgressHUD alloc] initWithWindow:window];
-    [window addSubview:progressHUD];
-    [window bringSubviewToFront:progressHUD];
-    progressHUD.userInteractionEnabled = NO;
-    
-    if (imageName) {
-        progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-        progressHUD.mode = MBProgressHUDModeCustomView;
+    if ([textView.text isEqualToString:@""]) {
+        if (textView.tag == 1) {
+            textView.text = @"填写社团描述,让更多的人参加社团...";
+        } else {
+            textView.text = @"填写社团公告...";
+        }
+        textView.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.24];
     }
-    
-    progressHUD.labelText = message;
-    [progressHUD show:YES];
-    [progressHUD hide:YES afterDelay:2];
 }
 
+#pragma mark - UIImagePicker
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.image.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

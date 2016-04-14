@@ -467,8 +467,19 @@
 
 - (void)publicActivity
 {
-    [self showHUDwithMessage:@"发布成功" imageName:@"success.png"];
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"确认发布活动?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消"
+                                              style:UIAlertActionStyleDefault
+                                            handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action) {
+                                                [self showHUDwithMessage:@"发布成功" imageName:@"success.png"];
+                                                [self.navigationController popViewControllerAnimated:YES];
+                                            }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)clickBackground

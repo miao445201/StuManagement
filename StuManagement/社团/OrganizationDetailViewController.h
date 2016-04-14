@@ -10,4 +10,6 @@
 
 @interface OrganizationDetailViewController : MIYBasisViewController
 
+@property (nonatomic, strong) NSDictionary *data;
+
 @end

@@ -31,11 +31,11 @@
 
 - (void)loadData
 {
-    UIImage *image1 = [UIImage imageNamed:@"xinwen111.jpg"];
-    UIImage *image2 = [UIImage imageNamed:@"xinwen222.jpg"];
-    UIImage *image3 = [UIImage imageNamed:@"xinwen333.jpg"];
+    UIImage *image1 = [UIImage imageNamed:@"shetuan111.jpg"];
+    UIImage *image2 = [UIImage imageNamed:@"shetuan222.jpg"];
+    UIImage *image3 = [UIImage imageNamed:@"shetuan333.jpg"];
 
-    self.cellArray = [@[@{ @"image":image1, @"name":@"计算机科学与技术学院1", @"organization":@"计算机学院1", @"numberOfPeople":@"11" },
+    self.cellArray = [@[@{ @"image":image1, @"name":@"闲云剧社", @"organization":@"计算机学院1", @"numberOfPeople":@"11" },
                         @{ @"image":image2, @"name":@"计算机科学与技术学院2", @"organization":@"计算机学院2", @"numberOfPeople":@"12" },
                         @{ @"image":image3, @"name":@"计算机科学与技术学院3", @"organization":@"计算机学院3", @"numberOfPeople":@"13" }] mutableCopy];
 }

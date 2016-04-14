@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, strong) UILabel *introductLabel;
+@property (nonatomic, strong) UILabel *yuanjixiaojiLabel;
 @property (nonatomic, strong) UILabel *noticeLabel;
 @property (nonatomic, strong) UILabel *numberLabel;
 @property (nonatomic, strong) UIView *reasonView;
@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = kLightWhiteColor;
     [self loadSubViews];
     [self registerForKeyboardNotifications];
     
@@ -62,9 +63,16 @@
         make.width.equalTo(self.view);
     }];
 
+    UIView *view1 = [[UIView alloc] init];
+    view1.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view1];
+    [view1 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(0);
+        make.height.equalTo(150);
+    }];
     
     self.logoImageView = [[UIImageView alloc] init];
-    [scrollView addSubview:self.logoImageView];
+    [view1 addSubview:self.logoImageView];
     [self.logoImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(20);
         make.size.equalTo(CGSizeMake(90, 90));
@@ -73,7 +81,7 @@
     
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.text = self.title;
-    [scrollView addSubview:self.nameLabel];
+    [view1 addSubview:self.nameLabel];
     [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.logoImageView).offset(5);
         make.left.equalTo(self.logoImageView.right).offset(15);
@@ -83,7 +91,7 @@
     }];
     
     UIImageView *timeImage = [[UIImageView alloc] init];
-    [scrollView addSubview:timeImage];
+    [view1 addSubview:timeImage];
     [timeImage makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
         make.top.equalTo(self.nameLabel.bottom).offset(10);
@@ -91,8 +99,7 @@
     }];
     
     self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.text = @"2016-01-01";
-    [scrollView addSubview:self.timeLabel];
+    [view1 addSubview:self.timeLabel];
     [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(timeImage.right).offset(8);
         make.centerY.equalTo(timeImage);
@@ -100,23 +107,22 @@
     }];
     
     UIImageView *introductImage = [[UIImageView alloc] init];
-    [scrollView addSubview:introductImage];
+    [introductImage setImage:[UIImage imageNamed:@"yuanjiyuanxiao"]];
+    [view1 addSubview:introductImage];
     [introductImage makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(timeImage);
         make.top.equalTo(timeImage.bottom).offset(10);
         make.size.equalTo(timeImage);
     }];
     
-    self.introductLabel = [[UILabel alloc] init];
-    self.introductLabel.text = @"xxx";
-    [scrollView addSubview:self.introductLabel];
-    [self.introductLabel makeConstraints:^(MASConstraintMaker *make) {
+    self.yuanjixiaojiLabel = [[UILabel alloc] init];
+    [view1 addSubview:self.yuanjixiaojiLabel];
+    [self.yuanjixiaojiLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(self.timeLabel);
         make.centerY.equalTo(introductImage);
     }];
     
-    UIView *line1 = [self addLineToSuperView:scrollView underView:self.introductLabel withGap:30];
-    
+    /*
     UILabel *noticeLeft = [[UILabel alloc] init];
     noticeLeft.text = @"公告:";
     [scrollView addSubview:noticeLeft];
@@ -175,17 +181,14 @@
         make.right.bottom.equalTo(0);
         make.height.equalTo(likeButton);
     }];
+    */
+    [self loadData];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *data1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.16sucai.com/uploadfile/2013/0531/20130531094006354.jpg"]];
-        NSData *data2 = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://cdns2.freepik.com/free-photo/circular-clock_318-25335.jpg"]];
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            [self.logoImageView setImage:[UIImage imageWithData:data1]];
-            [introductImage setImage:[UIImage imageWithData:data2]];
-            [timeImage setImage:[UIImage imageWithData:data2]];
-        });
-    });
-    
+}
+
+- (void)loadData
+{
+//    self.logoImageView.image = seld.data[@""];
 }
 
 - (void)clickLike
