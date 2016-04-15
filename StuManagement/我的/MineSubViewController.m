@@ -9,12 +9,14 @@
 #import "MineSubViewController.h"
 #import "MineSubTableViewCell.h"
 #import "MJRefresh.h"
+#import "ActivityDetailViewController.h"
+#import "OrganizationDetailViewController.h"
 
 @interface MineSubViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *cellArray;
 @property (nonatomic, strong) NSArray *buttons;
+@property (nonatomic) NSInteger type;
 
 @end
 
@@ -23,7 +25,6 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        [self loadData];
         
     }
     return self;
@@ -36,26 +37,26 @@
     [self loadSubViews];
     
     self.tableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 进入刷新状态后会自动调用这个block
-        // [self.tableView.mj_header beginRefreshing]
-        // [self.tableView.mj_header endRefreshing];
-        NSRange range = NSMakeRange(3, self.cellArray.count-3);
-        [self.cellArray removeObjectsInRange:range];
-        [self.tableView reloadData];
+//        // 进入刷新状态后会自动调用这个block
+//        // [self.tableView.mj_header beginRefreshing]
+//        // [self.tableView.mj_header endRefreshing];
+//        NSRange range = NSMakeRange(3, self.data.count-3);
+//        [self.data removeObjectsInRange:range];
+//        [self.tableView reloadData];
         [self.tableView.mj_footer resetNoMoreData];
         [self.tableView.mj_header endRefreshing];
     }];
     
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        // 进入刷新状态后会自动调用这个block
-        // [self.tableView.mj_footer resetNoMoreData];
-        // [self.tableView.mj_footer endRefreshingWithNoMoreData]
-        if (self.cellArray.count > 10) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-            return;
-        }
-        [self.cellArray addObjectsFromArray:self.cellArray];
-        [self.tableView reloadData];
+//        // 进入刷新状态后会自动调用这个block
+//        // [self.tableView.mj_footer resetNoMoreData];
+//        // [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//        if (self.data.count > 10) {
+//            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//            return;
+//        }
+//        [self.data addObjectsFromArray:self.data];
+//        [self.tableView reloadData];
         [self.tableView.mj_footer endRefreshing];
         
     }];
@@ -69,18 +70,6 @@
     
 }
 
-- (void)loadData
-{
-    UIImage *image1 = [UIImage imageNamed:@"xinwen111.jpg"];
-    UIImage *image2 = [UIImage imageNamed:@"xinwen222.jpg"];
-    UIImage *image3 = [UIImage imageNamed:@"xinwen333.jpg"];
-    
-    self.cellArray = [@[@{ @"image":image1, @"name":@"计算机科学与技术学院1", @"time":@"计算机学院1", @"numberOfPeople":@"11" },
-                        @{ @"image":image2, @"name":@"计算机科学与技术学院2", @"time":@"计算机学院2", @"numberOfPeople":@"12" },
-                        @{ @"image":image3, @"name":@"计算机科学与技术学院3", @"time":@"计算机学院3", @"numberOfPeople":@"13" }] mutableCopy];
-}
-
-
 - (void)loadSubViews
 {
     
@@ -92,6 +81,7 @@
     
     UIView *headerView = nil;
     if ([self.title isEqualToString:@"我的收藏"]) {
+        self.data = self.allData[0];
         headerView = [[UIView alloc] init];
         headerView.backgroundColor = kLightWhiteColor;
         [self.view addSubview:headerView];
@@ -100,39 +90,43 @@
             make.height.equalTo(40);
         }];
         
-        UIButton *newsButton = [[UIButton alloc] init];
-        [newsButton setTitle:@"新闻" forState:UIControlStateNormal];
-        newsButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [newsButton setTitleColor:kMainProjColor forState:UIControlStateNormal];
-        [headerView addSubview:newsButton];
-        [newsButton makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.bottom.equalTo(0);
-            make.width.equalTo(headerView).multipliedBy(0.33);
-        }];
-        
         UIButton *activityButton = [[UIButton alloc] init];
         [activityButton setTitle:@"活动" forState:UIControlStateNormal];
         [activityButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         activityButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        [activityButton setTitleColor:kMainProjColor forState:UIControlStateNormal];
         [headerView addSubview:activityButton];
         [activityButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.equalTo(0);
-            make.left.equalTo(newsButton.right);
-            make.width.equalTo(headerView).multipliedBy(0.34);
+            make.left.top.bottom.equalTo(0);
+            make.width.equalTo(headerView).multipliedBy(0.33);
         }];
-        
+
         UIButton *shetuanButton = [[UIButton alloc] init];
         [shetuanButton setTitle:@"社团" forState:UIControlStateNormal];
         [shetuanButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         shetuanButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
         [headerView addSubview:shetuanButton];
         [shetuanButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.right.equalTo(0);
+            make.top.bottom.equalTo(0);
             make.left.equalTo(activityButton.right);
+            make.width.equalTo(headerView).multipliedBy(0.34);
         }];
-        newsButton.tag = 0;
-        activityButton.tag = 1;
-        shetuanButton.tag = 2;
+
+        UIButton *newsButton = [[UIButton alloc] init];
+        [newsButton setTitle:@"新闻" forState:UIControlStateNormal];
+        newsButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        [newsButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [headerView addSubview:newsButton];
+        [newsButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.right.equalTo(0);
+            make.left.equalTo(shetuanButton.right);
+        }];
+
+        self.type = 0;
+        activityButton.tag = 0;
+        shetuanButton.tag = 1;
+        newsButton.tag = 2;
+
         [newsButton addTarget:self action:@selector(clickButtons:) forControlEvents:UIControlEventTouchUpInside];
         [activityButton addTarget:self action:@selector(clickButtons:) forControlEvents:UIControlEventTouchUpInside];
         [shetuanButton addTarget:self action:@selector(clickButtons:) forControlEvents:UIControlEventTouchUpInside];
@@ -153,6 +147,10 @@
 
 - (void)clickButtons:(UIButton *)sender
 {
+    self.data = self.allData[sender.tag];
+    self.type = sender.tag;
+    [self.tableView reloadData];
+    
     for (UIButton *button in self.buttons) {
         if ([button isEqual:sender]) {
             [sender setTitleColor:kMainProjColor forState:UIControlStateNormal];
@@ -166,7 +164,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.cellArray.count;
+    return self.data.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -183,7 +181,7 @@
         cell = [[MineSubTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    [cell loadData:self.cellArray[indexPath.row]];
+    [cell loadData:self.data[indexPath.row]];
     
     return cell;
 }
@@ -191,6 +189,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.title isEqualToString:@"我的活动"]) {
+        ActivityDetailViewController *controller = [[ActivityDetailViewController alloc] init];
+        controller.data = self.data[indexPath.row];
+        controller.isFromMine = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+
+
+    }  else if ([self.title isEqualToString:@"我的社团"]) {
+        OrganizationDetailViewController *controller = [[OrganizationDetailViewController alloc] init];
+        controller.data = self.data[indexPath.row];
+        [self.navigationController pushViewController:controller animated:YES];
+
+    } else {
+        if (self.type == 0) {
+            ActivityDetailViewController *controller = [[ActivityDetailViewController alloc] init];
+            controller.data = self.data[indexPath.row];
+            [self.navigationController pushViewController:controller animated:YES];
+
+        } else if (self.type == 1) {
+            OrganizationDetailViewController *controller = [[OrganizationDetailViewController alloc] init];
+            controller.data = self.data[indexPath.row];
+            [self.navigationController pushViewController:controller animated:YES];
+
+        } else {
+            
+        }
+
+        
+    }
+    
 }
 
 @end

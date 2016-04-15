@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *organization;
-@property (nonatomic, strong) UILabel *numberOfPeople;
 
 @end
 
@@ -49,26 +48,21 @@
     self.image = [[UIImageView alloc] init];
     self.name = [[UILabel alloc] init];
     self.organization = [[UILabel alloc] init];
-    self.numberOfPeople = [[UILabel alloc] init];
     UIView *line = [[UIView alloc] init];
    
     self.image.contentMode = UIViewContentModeScaleToFill;
     
-    self.name.font = [UIFont systemFontOfSize:14.0];
-    self.organization.font = [UIFont systemFontOfSize:13.0];
-    self.numberOfPeople.font = [UIFont systemFontOfSize:11.0];
+    self.name.font = [UIFont systemFontOfSize:16.0];
+    self.organization.font = [UIFont systemFontOfSize:15.0];
     
     self.organization.textColor = [UIColor grayColor];
-    self.numberOfPeople.textColor = [UIColor lightGrayColor];
     
-    self.numberOfPeople.textAlignment = NSTextAlignmentRight;
     
     line.backgroundColor = [UIColor lightGrayColor];
     
     [self.contentView addSubview:self.image];
     [self.contentView addSubview:self.name];
     [self.contentView addSubview:self.organization];
-    [self.contentView addSubview:self.numberOfPeople];
     [self.contentView addSubview:line];
     
     [self.image makeConstraints:^(MASConstraintMaker *make) {
@@ -79,19 +73,13 @@
     }];
     
     [self.name makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.image.right).offset(10);
+        make.left.equalTo(self.image.right).offset(18);
         make.bottom.equalTo(self.contentView.centerY).offset(-8);
     }];
     
     [self.organization makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.name);
         make.top.equalTo(self.contentView.centerY).offset(8);
-    }];
-
-    [self.numberOfPeople makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.organization.right).offset(10);
-        make.right.equalTo(-15);
-        make.bottom.equalTo(self.organization);
     }];
     
     [line makeConstraints:^(MASConstraintMaker *make) {
@@ -107,8 +95,7 @@
 {
     [self.image setImage:data[@"image"]];
     self.name.text = [NSString stringWithFormat:@"%@", data[@"name"]];
-    self.organization.text = [NSString stringWithFormat:@"所属学院:%@", data[@"organization"]];
-    self.numberOfPeople.text = [NSString stringWithFormat:@"成员%@人", data[@"numberOfPeople"]];
+    self.organization.text = [NSString stringWithFormat:@"%@", data[@"yuanjixiaoji"]];
 }
 
 

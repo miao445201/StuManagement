@@ -10,4 +10,7 @@
 
 @interface MineSubViewController : MIYBasisViewController
 
+@property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSArray *allData;
+
 @end

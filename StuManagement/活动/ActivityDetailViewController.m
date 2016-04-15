@@ -45,7 +45,17 @@ const NSInteger maxNumberOfWords = 150;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    if (self.isFromMine) {
+        UIButton *qiandao = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34, 34)];
+        qiandao.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        [qiandao setTitle:@"签" forState:UIControlStateNormal];
+        [qiandao setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [qiandao addTarget:self action:@selector(clickQiandao:) forControlEvents:UIControlEventTouchUpInside];
+        [self makeView:qiandao toRoundCorner:qiandao.frame.size.width/2 withWidth:1 color:[UIColor whiteColor]];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:qiandao];
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
+
     [self loadSubViews];
 }
 
@@ -103,7 +113,7 @@ const NSInteger maxNumberOfWords = 150;
     }];
 
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.text = self.data[@"title"];
+    self.titleLabel.text = self.data[@"name"];
     self.titleLabel.font = [UIFont systemFontOfSize:18.0];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -269,7 +279,7 @@ const NSInteger maxNumberOfWords = 150;
             make.left.right.equalTo(0);
         }];
         UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor lightGrayColor];
+        line.backgroundColor = kLightWhiteColor;
         [newView addSubview:line];
         [line makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(15);
@@ -438,6 +448,15 @@ const NSInteger maxNumberOfWords = 150;
 
     }
 
+}
+
+- (void)clickQiandao:(UIButton *)sender
+{
+    if (!sender.selected) {
+        sender.selected = YES;
+        [sender setTitle:@"已签" forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"签到成功" imageName:@"success.png"];
+    }
 }
 
 //- (void)clickZhanKai:(UIButton *)sender

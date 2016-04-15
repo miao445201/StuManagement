@@ -14,11 +14,14 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *yuanjixiaojiLabel;
+@property (nonatomic, strong) UILabel *detailLabel;
 @property (nonatomic, strong) UILabel *noticeLabel;
-@property (nonatomic, strong) UILabel *numberLabel;
+
+@property (nonatomic, strong) UIButton *applyButton;
 @property (nonatomic, strong) UIView *reasonView;
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UITextView *reasonTextView;
+
 
 @property (nonatomic) BOOL isTyping;
 @property (nonatomic) CGFloat keyboardHeight;
@@ -30,6 +33,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = kLightWhiteColor;
+    self.title = self.data[@"name"];
     [self loadSubViews];
     [self registerForKeyboardNotifications];
     
@@ -68,29 +72,30 @@
     [scrollView addSubview:view1];
     [view1 makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(0);
-        make.height.equalTo(150);
+        make.width.equalTo(ScreenWidth);
+        make.height.equalTo(120);
     }];
     
     self.logoImageView = [[UIImageView alloc] init];
     [view1 addSubview:self.logoImageView];
     [self.logoImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(20);
-        make.size.equalTo(CGSizeMake(90, 90));
+        make.top.left.equalTo(15);
+        make.bottom.equalTo(-15);
+        make.width.equalTo(self.logoImageView.height);
     }];
-
     
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.text = self.title;
+    self.nameLabel.font = [UIFont systemFontOfSize:16];
     [view1 addSubview:self.nameLabel];
     [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.logoImageView).offset(5);
         make.left.equalTo(self.logoImageView.right).offset(15);
         make.right.equalTo(-15);
-        make.right.equalTo(self.view).offset(-15);
         make.height.equalTo(25);
     }];
     
     UIImageView *timeImage = [[UIImageView alloc] init];
+    timeImage.image = [UIImage imageNamed:@"shijian"];
     [view1 addSubview:timeImage];
     [timeImage makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
@@ -99,6 +104,7 @@
     }];
     
     self.timeLabel = [[UILabel alloc] init];
+    self.timeLabel.font = [UIFont systemFontOfSize:14];
     [view1 addSubview:self.timeLabel];
     [self.timeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(timeImage.right).offset(8);
@@ -116,53 +122,73 @@
     }];
     
     self.yuanjixiaojiLabel = [[UILabel alloc] init];
+    self.yuanjixiaojiLabel.font = [UIFont systemFontOfSize:14];
     [view1 addSubview:self.yuanjixiaojiLabel];
     [self.yuanjixiaojiLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(self.timeLabel);
         make.centerY.equalTo(introductImage);
     }];
     
-    /*
-    UILabel *noticeLeft = [[UILabel alloc] init];
-    noticeLeft.text = @"公告:";
-    [scrollView addSubview:noticeLeft];
-    [noticeLeft makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line1).offset(18);
-        make.left.equalTo(20);
-        make.width.equalTo(40);
+    UIView *view2 = [[UIView alloc] init];
+    view2.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view2];
+    [view2 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view1.bottom).offset(15);
+        make.left.right.equalTo(0);
+//        make.height.equalTo(120).priorityLow();
+    }];
+    
+    self.detailLabel = [[UILabel alloc] init];
+    self.detailLabel.font = [UIFont systemFontOfSize:16.0];
+    self.detailLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.detailLabel.numberOfLines = 0;
+    [view2 addSubview:self.detailLabel];
+    [self.detailLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(15);
+        make.right.equalTo(-15);
+        make.top.equalTo(15);
+    }];
+    
+    [view2 makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.detailLabel).offset(15);
+    }];
+    
+    UIView *view3 = [[UIView alloc] init];
+    view3.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view3];
+    [view3 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view2.bottom).offset(15);
+        make.left.right.equalTo(0);
     }];
     
     self.noticeLabel = [[UILabel alloc] init];
-    self.noticeLabel.text = @"测试数据测试数据测试数据测试数据，测试数据测试数据测试数据测试数据。测试数据测试数据测试数据测试数据测试数据，测试数据测试数据测试数据";
+    self.noticeLabel.font = [UIFont systemFontOfSize:16.0];
     self.noticeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.noticeLabel.numberOfLines = 0;
-    [scrollView addSubview:self.noticeLabel];
+    [view3 addSubview:self.noticeLabel];
     [self.noticeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(noticeLeft.bottom).equalTo(10);
-        make.left.equalTo(noticeLeft.right).offset(-8);
-        make.right.equalTo(-20);
+        make.left.equalTo(15);
+        make.right.equalTo(-15);
+        make.top.equalTo(15);
+    }];
+    [view3 makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.noticeLabel).offset(15);
     }];
     
-    self.numberLabel = [[UILabel alloc] init];
-    self.numberLabel.text = @"成员数:16";
-    [scrollView addSubview:self.numberLabel];
-    [self.numberLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(noticeLeft);
-        make.top.equalTo(self.noticeLabel.bottom).offset(30);
-//        make.width.equalTo(200);
-    }];
-
-    [self addLineToSuperView:scrollView underView:self.numberLabel withGap:10];
     
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.noticeLabel).offset(1000);
+        make.bottom.equalTo(view3).offset(50);
     }];
     
+    
     UIButton *likeButton = [[UIButton alloc] init];
+    [likeButton setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+    [likeButton setImageEdgeInsets:UIEdgeInsetsMake(13, 40, 13, 60)];
     [likeButton setTitle:@"我喜欢" forState:UIControlStateNormal];
-    [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    likeButton.backgroundColor = [UIColor redColor];
-    [likeButton addTarget:self action:@selector(clickLike) forControlEvents:UIControlEventTouchUpInside];
+    [likeButton setTitleColor:kMainProjColor forState:UIControlStateNormal];
+    likeButton.backgroundColor = [UIColor whiteColor];
+    likeButton.selected = NO;
+    [likeButton addTarget:self action:@selector(clickLike:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:likeButton];
     [likeButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.equalTo(0);
@@ -171,50 +197,75 @@
     }];
     
     UIButton *applyButton = [[UIButton alloc] init];
-    [applyButton setTitle:@"申请加入" forState:UIControlStateNormal];
-    [applyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    applyButton.backgroundColor = [UIColor orangeColor];
-    [applyButton addTarget:self action:@selector(clickApply) forControlEvents:UIControlEventTouchUpInside];
+    self.applyButton = applyButton;
+    [applyButton setImage:[UIImage imageNamed:@"woyaobaoming"] forState:UIControlStateNormal];
+    [applyButton setImageEdgeInsets:UIEdgeInsetsMake(13, 35, 13, 70)];
+    [applyButton setTitle:@"我要报名" forState:UIControlStateNormal];
+    [applyButton setTitleColor:kMainProjColor forState:UIControlStateNormal];
+    applyButton.backgroundColor = [UIColor whiteColor];
+    applyButton.selected = NO;
+    [applyButton addTarget:self action:@selector(clickApply:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:applyButton];
     [applyButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.centerX);
         make.right.bottom.equalTo(0);
         make.height.equalTo(likeButton);
     }];
-    */
+    
     [self loadData];
     
 }
 
 - (void)loadData
 {
-//    self.logoImageView.image = seld.data[@""];
+    self.nameLabel.text = self.data[@"name"];
+    self.logoImageView.image = self.data[@"image"];
+    self.timeLabel.text = self.data[@"time"];
+    self.yuanjixiaojiLabel.text = self.data[@"yuanjixiaoji"];
+    self.detailLabel.text = self.data[@"detail"];
+    self.noticeLabel.text = self.data[@"notice"];
 }
 
-- (void)clickLike
+- (void)clickLike:(UIButton *)sender
 {
-    
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [sender setTitle:@"已喜欢" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"shoucangfilled"] forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"已喜欢" imageName:@"success.png"];
+    } else {
+        [sender setTitle:@"我喜欢" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"shoucang"] forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"取消喜欢" imageName:@"success.png"];
+    }
 }
 
-- (void)clickApply
+- (void)clickApply:(UIButton *)sender
 {
-    self.reasonView.alpha = 1.0;
-    self.backgroundView.alpha = 1.0;
-    self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-64, 0, 0);
-    [self.view addSubview:self.backgroundView];
-    [self.view addSubview:self.reasonView];
-    CGFloat width = 250;
-    CGFloat height = 230;
-    
-    [UIView animateWithDuration:0.4
-                          delay:0.1
-         usingSpringWithDamping:0.7
-          initialSpringVelocity:1.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         self.reasonView.frame = CGRectMake((ScreenWidth-width)/2, (ScreenHeight-height)/2-64, width, height);
-                     }
-                     completion:nil];
+    if (!sender.selected) {
+        self.reasonView.alpha = 1.0;
+        self.backgroundView.alpha = 1.0;
+        self.reasonView.frame = CGRectMake(ScreenWidth/2, ScreenHeight/2-64, 0, 0);
+        [self.view addSubview:self.backgroundView];
+        [self.view addSubview:self.reasonView];
+        CGFloat width = 250;
+        CGFloat height = 230;
+        
+        [UIView animateWithDuration:0.4
+                              delay:0.1
+             usingSpringWithDamping:0.7
+              initialSpringVelocity:1.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             self.reasonView.frame = CGRectMake((ScreenWidth-width)/2, (ScreenHeight-height)/2-64, width, height);
+                         }
+                         completion:nil];
+    } else {
+        sender.selected = NO;
+        [sender setImage:[UIImage imageNamed:@"woyaobaoming"] forState:UIControlStateNormal];
+        [sender setTitle:@"我要报名" forState:UIControlStateNormal];
+        [self showHUDwithMessage:@"取消成功" imageName:@"success.png"];
+    }
 }
 
 - (UIView *)reasonView
@@ -308,8 +359,10 @@
 - (void)clickOk
 {
     //do
-    
-    
+    self.applyButton.selected = YES;
+    [self.applyButton setTitle:@"取消报名" forState:UIControlStateNormal];
+    [self.applyButton setImage:[UIImage imageNamed:@"yibaodao"] forState:UIControlStateNormal];
+    [self showHUDwithMessage:@"报名成功" imageName:@"success.png"];
     self.isTyping = NO;
     [self tapBackgroundView];
 }

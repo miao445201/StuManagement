@@ -10,6 +10,7 @@
 
 @interface ActivityDetailViewController : MIYBasisViewController
 
+@property (nonatomic) BOOL isFromMine;
 @property (nonatomic, strong) NSDictionary *data;
 
 @end
