@@ -169,7 +169,7 @@
     
     self.time = [[UILabel alloc] init];
     self.time.font = [UIFont systemFontOfSize:14.0];
-    self.time.textColor = [UIColor lightGrayColor];
+    self.time.textColor = kMainBlackColor;
     [self.contentView addSubview:self.time];
     [self.time makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(image1);
@@ -259,7 +259,7 @@
     
     self.time = [[UILabel alloc] init];
     self.time.font = [UIFont systemFontOfSize:14.0];
-    self.time.textColor = kLightTextColor;
+    self.time.textColor = kMainBlackColor;
     [scrollView addSubview:self.time];
     [self.time makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.name.bottom).offset(5);
@@ -286,7 +286,7 @@
         make.right.equalTo(-gap);
     }];
     
-    //4444444444
+    //评论
     UIView *lastView = nil;
     for (int i = 0; i < self.comments.count; i++) {
         UIView *newView = [[UIView alloc] init];

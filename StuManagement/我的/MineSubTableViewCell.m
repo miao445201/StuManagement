@@ -43,24 +43,27 @@
     [self.image makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(10);
         make.bottom.equalTo(-10);
-        make.width.equalTo(self.image.height);
+        make.width.equalTo(self.image.height).multipliedBy(1.3);
     }];
     
     self.nameLabel = [[UILabel alloc] init];
+    self.nameLabel.numberOfLines = 0;
+    self.nameLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.nameLabel.textColor = kMainBlackColor;
-    self.nameLabel.font = [UIFont systemFontOfSize:17.0];
+    self.nameLabel.font = [UIFont systemFontOfSize:17.0 weight:0.4];
     [self.contentView addSubview:self.nameLabel];
     [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(20);
         make.left.equalTo(self.image.right).offset(10);
-        make.bottom.equalTo(self.image.centerY).offset(-10);
+        make.right.equalTo(-10);
     }];
     
     UIImageView *timeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shijian"]];
     [self.contentView addSubview:timeImage];
     [timeImage makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.image.centerY).offset(13);
         make.left.equalTo(self.nameLabel);
         make.width.height.equalTo(15);
+        make.bottom.equalTo(-12);
     }];
 
     self.timeLabel = [[UILabel alloc] init];

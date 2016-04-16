@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "ActivityDetailViewController.h"
 #import "OrganizationDetailViewController.h"
+#import "SpotlightViewController.h"
 
 @interface MineSubViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -213,7 +214,9 @@
             [self.navigationController pushViewController:controller animated:YES];
 
         } else {
-            
+            SpotlightDetailController *controller = [[SpotlightDetailController alloc] init];
+            controller.data = self.data[indexPath.row];
+            [self.navigationController pushViewController:controller animated:YES];
         }
 
         
