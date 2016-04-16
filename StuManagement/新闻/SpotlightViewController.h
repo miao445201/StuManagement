@@ -11,3 +11,15 @@
 @interface SpotlightViewController : MIYBasisViewController
 
 @end
+
+@interface SpotlightTableCell : UITableViewCell
+
+- (void)loadData:(NSDictionary *)data;
+
+@end
+
+@interface  SpotlightDetailController: MIYBasisViewController
+
+@property (nonatomic, strong) NSDictionary *data;
+
+@end

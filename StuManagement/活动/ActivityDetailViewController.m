@@ -114,7 +114,7 @@ const NSInteger maxNumberOfWords = 150;
 
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.text = self.data[@"name"];
-    self.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    self.titleLabel.font = [UIFont systemFontOfSize:18.0 weight:0.4];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [firstBackView addSubview:self.titleLabel];
@@ -655,6 +655,7 @@ const NSInteger maxNumberOfWords = 150;
     self.navigationItem.rightBarButtonItem = rightItem;
 
     [self loadSubViews];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

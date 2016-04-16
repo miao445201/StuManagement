@@ -85,7 +85,7 @@
     }];
     
     self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.font = [UIFont systemFontOfSize:16];
+    self.nameLabel.font = [UIFont systemFontOfSize:16.0 weight:0.4];
     [view1 addSubview:self.nameLabel];
     [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.logoImageView).offset(5);
