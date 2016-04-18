@@ -75,51 +75,196 @@
 - (void)loadSubViews
 {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.backgroundColor = kLightWhiteColor;
     [self.view addSubview:scrollView];
     [scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
         make.width.equalTo(self.view);
     }];
  
+    NSInteger gap = 10;
+    
+    //11111111
+    UIView *view1 = [[UIView alloc] init];
+    view1.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view1];
+    [view1 makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(ScreenWidth);
+        make.top.left.right.equalTo(0);
+        make.height.equalTo(ScreenWidth/1.8);
+    }];
+    
     ImageRollScrollView *imageRollView = [[ImageRollScrollView alloc] init];
-    
-    UIButton *activity = [[UIButton alloc] init];
-    activity.backgroundColor = [UIColor redColor];
-    [activity setTitle:@"活动" forState:UIControlStateNormal];
-    [activity setImage:[UIImage imageNamed:@"huodong"] forState:UIControlStateNormal];
-    
-    UIButton *organization = [[UIButton alloc] init];
-    organization.backgroundColor = [UIColor orangeColor];
-    [organization setTitle:@"社团" forState:UIControlStateNormal];
-    [organization setImage:[UIImage imageNamed:@"shetuan"] forState:UIControlStateNormal];
-    
-    UIButton *spotlight = [[UIButton alloc] init];
-    spotlight.backgroundColor = [UIColor cyanColor];
-    [spotlight setTitle:@"新闻" forState:UIControlStateNormal];
-    [spotlight setImage:[UIImage imageNamed:@"xinwen"] forState:UIControlStateNormal];
-    
-    UIButton *weather = [[UIButton alloc] init];
-    weather.backgroundColor = [UIColor greenColor];
-    [weather setTitle:@"天气" forState:UIControlStateNormal];
-    [weather setImage:[UIImage imageNamed:@"tianqi"] forState:UIControlStateNormal];
-    
-    UIButton *mine = [[UIButton alloc] init];
-    mine.backgroundColor = [UIColor blueColor];
-    [mine setTitle:@"我" forState:UIControlStateNormal];
-    [mine setImage:[UIImage imageNamed:@"wo"] forState:UIControlStateNormal];
-    
-    NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
-    for (UIButton *button in array) {
-        [self makeView:button toRoundCorner:8 withWidth:0 color:nil];
-    }
-    
-    [scrollView addSubview:imageRollView];
-    [scrollView addSubview:activity];
-    [scrollView addSubview:organization];
-    [scrollView addSubview:spotlight];
-    [scrollView addSubview:weather];
-    [scrollView addSubview:mine];
+    [view1 addSubview:imageRollView];
+    [imageRollView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(gap, gap, gap, gap));
+    }];
 
+    UIView *view2 = [[UIView alloc] init];
+    view2.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view2];
+    [view2 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view1.bottom).offset(2*gap);
+        make.left.right.equalTo(0);
+        make.height.equalTo(ScreenWidth/1.9);
+    }];
+    
+    UIImageView *image111 = [[UIImageView alloc] init];
+    image111.image = [UIImage imageNamed:@"huodong"];
+    image111.contentMode = UIViewContentModeScaleToFill;
+    [view2 addSubview:image111];
+    UIButton *activity = [[UIButton alloc] init];
+    [view2 addSubview:activity];
+    [activity makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(view2.centerX).multipliedBy(0.5);
+        make.top.equalTo(2*gap);
+        make.width.equalTo(activity.height);
+        make.bottom.equalTo(-5*gap);
+    }];
+    [image111 makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(activity);
+    }];
+    
+    UILabel *huodongLabel = [[UILabel alloc] init];
+    huodongLabel.text = @"活动";
+    huodongLabel.font = [UIFont systemFontOfSize:16.0];
+    huodongLabel.textAlignment = NSTextAlignmentCenter;
+    huodongLabel.textColor = kMainBlackColor;
+    [view2 addSubview:huodongLabel];
+    [huodongLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(-gap);
+        make.centerX.equalTo(activity);
+    }];
+    
+    UIView *verticalLine = [[UIView alloc] init];
+    verticalLine.backgroundColor = kLightWhiteColor;
+    [view2 addSubview:verticalLine];
+    [verticalLine makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.centerX.equalTo(0);
+        make.width.equalTo(1.5);
+    }];
+    
+
+    UIImageView *image222 = [[UIImageView alloc] init];
+    image222.image = [UIImage imageNamed:@"shetuan"];
+    image222.contentMode = UIViewContentModeScaleToFill;
+    [view2 addSubview:image222];
+    UIButton *organization = [[UIButton alloc] init];
+//    organization.backgroundColor = [UIColor orangeColor];
+    [view2 addSubview:organization];
+    [organization makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(gap);
+        make.right.equalTo(-gap);
+        make.bottom.equalTo(view2.centerY).offset(-gap);
+    }];
+    UILabel *shetuanLabel = [[UILabel alloc] init];
+    shetuanLabel.text = @"社团";
+    shetuanLabel.font = [UIFont systemFontOfSize:16.0];
+    shetuanLabel.textAlignment = NSTextAlignmentCenter;
+    shetuanLabel.textColor = kMainBlackColor;
+    [view2 addSubview:shetuanLabel];
+    [shetuanLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(verticalLine).offset(2*gap);
+        make.centerY.equalTo(organization);
+    }];
+    [organization makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(shetuanLabel.right).offset(gap);
+    }];
+    [image222 makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(organization);
+    }];
+
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = kLightWhiteColor;
+    [view2 addSubview:line];
+    [line makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(view2.centerX);
+        make.right.equalTo(0);
+        make.centerY.equalTo(0);
+        make.height.equalTo(1.5);
+    }];
+
+    UIImageView *image333 = [[UIImageView alloc] init];
+    image333.image = [UIImage imageNamed:@"xinwen"];
+    image333.contentMode = UIViewContentModeScaleToFill;
+    [view2 addSubview:image333];
+    UIButton *spotlight = [[UIButton alloc] init];
+//    spotlight.backgroundColor = [UIColor cyanColor];
+    [view2 addSubview:spotlight];
+    [spotlight makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view2.centerY).offset(gap);
+        make.bottom.equalTo(-gap);
+        make.right.equalTo(-gap);
+    }];
+    UILabel *xinwenLabel = [[UILabel alloc] init];
+    xinwenLabel.text = @"新闻";
+    xinwenLabel.font = [UIFont systemFontOfSize:16.0];
+    xinwenLabel.textAlignment = NSTextAlignmentCenter;
+    xinwenLabel.textColor = kMainBlackColor;
+    [view2 addSubview:xinwenLabel];
+    [xinwenLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(verticalLine).offset(2*gap);
+        make.centerY.equalTo(spotlight);
+    }];
+    [spotlight makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(xinwenLabel.right).offset(gap);
+    }];
+    [image333 makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(spotlight);
+    }];
+    
+    UIView *view3 = [[UIView alloc] init];
+    view3.backgroundColor = [UIColor whiteColor];
+    [scrollView addSubview:view3];
+    [view3 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(view2.bottom).offset(1);
+        make.left.right.equalTo(0);
+        make.height.equalTo(ScreenWidth/2.4);
+    }];
+
+    UIImageView *image444 = [[UIImageView alloc] init];
+    image444.image = [UIImage imageNamed:@"wo"];
+    image444.contentMode = UIViewContentModeScaleToFill;
+    [view3 addSubview:image444];
+    UIButton *mine = [[UIButton alloc] init];
+//    mine.backgroundColor = [UIColor blueColor];
+    [view3 addSubview:mine];
+    [mine makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(gap);
+        make.left.equalTo(2*gap);
+        make.bottom.equalTo(-gap);
+    }];
+    UILabel *woLabel =[[UILabel alloc] init];
+    woLabel.text = @"我";
+    woLabel.font = [UIFont systemFontOfSize:16.0];
+    woLabel.textAlignment = NSTextAlignmentCenter;
+    woLabel.textColor = kMainBlackColor;
+    [view3 addSubview:woLabel];
+    [woLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-4*gap);
+        make.centerY.equalTo(mine);
+        make.width.equalTo(woLabel.height);
+    }];
+    [mine makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(woLabel.left).offset(-3*gap);
+    }];
+    [image444 makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(mine);
+    }];
+
+    
+    [scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(view3).offset(3*gap);
+    }];
+
+//    NSArray *array = @[imageRollView, activity, organization, spotlight, weather, mine];
+//    for (UIButton *button in array) {
+//        [self makeView:button toRoundCorner:8 withWidth:0 color:nil];
+//    }
+    
+    [self.view layoutIfNeeded];
+    [self makeView:image111 toRoundCorner:image111.frame.size.height/2 withWidth:0 color:nil];
+    
     activity.tag = 1;
     organization.tag = 2;
     spotlight.tag = 3;
@@ -130,63 +275,14 @@
     [spotlight addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
     [mine addTarget:self action:@selector(pushToViewController:) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    //layout
-    NSInteger gap = 10;
-    
-    [imageRollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(gap);
-        make.left.equalTo(gap);
-        make.right.equalTo(-gap);
-        make.height.equalTo(activity.width);
-    }];
 
-    [activity makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(gap);
-        make.right.equalTo(self.view.centerX).offset(-gap/2);
-        make.top.equalTo(imageRollView.bottom).offset(gap);
-        make.height.equalTo(activity.width).offset(-40);
-    }];
-    
-    [organization makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.centerX).offset(gap/2);
-        make.right.equalTo(-gap);
-        make.top.width.height.equalTo(activity);
-    }];
-    
-    [spotlight makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(activity.bottom).offset(gap);
-        make.left.equalTo(gap);
-        make.width.equalTo(5*ScreenWidth/9);
-        make.height.equalTo(activity);
-    }];
-    
-    [weather makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(spotlight);
-        make.left.equalTo(spotlight.right).offset(gap);
-        make.right.equalTo(-gap);
-        make.height.equalTo(activity);
-    }];
-    
-    [mine makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(spotlight.bottom).offset(gap);
-        make.left.equalTo(gap);
-        make.right.equalTo(-gap);
-        make.height.equalTo(activity);
-    }];
-    
-    [scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(mine.bottom).offset(gap).priorityLow();
-        make.bottom.greaterThanOrEqualTo(self.view);
-    }];
-    
     UIImage *image1 = [UIImage imageNamed:@"xinwen111.jpg"];
     UIImage *image2 = [UIImage imageNamed:@"xinwen222.jpg"];
     UIImage *image3 = [UIImage imageNamed:@"xinwen333.jpg"];
     NSArray *images = @[image1, image2, image3];
-    NSArray *texts = @[@"我说今晚月亮好美", @"你说是的", @"写台词送给男生签名照"];
+//    NSArray *texts = @[@"我说今晚月亮好美", @"你说是的", @"写台词送给男生签名照"];
     
-    [imageRollView loadImages:images withRollTime:3 optionalText:texts andContentMode:nil];
+    [imageRollView loadImages:images withRollTime:3 optionalText:nil andContentMode:nil];
 }
 
 - (void)pushToViewController:(UIButton *)sender

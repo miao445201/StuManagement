@@ -465,18 +465,20 @@
 //根据键盘高度重置把view往上移
 - (void)setViewMovedUp:(BOOL)movedUp
 {
-    UITextView *textView = nil;
+    UIView *view = nil;
     if ([self.introductionTextView isFirstResponder]) {
-        textView = self.introductionTextView;
+        view = self.introductionTextView;
     } else if ([self.noticeTextView isFirstResponder]) {
-        textView = self.noticeTextView;
+        view = self.noticeTextView;
+    } else if ([self.nameTextField isFirstResponder]) {
+        view = self.nameTextField;
     }
     
     CGFloat upHeight = 0;
-    if (ScreenHeight - self.keyboardHeight > textView.frame.origin.y + textView.frame.size.height + 120) {
+    if (ScreenHeight - self.keyboardHeight > view.frame.origin.y + view.frame.size.height + 120) {
         upHeight = 0;
     } else {
-        upHeight = textView.frame.origin.y + textView.frame.size.height - (ScreenHeight - self.keyboardHeight) + 120;
+        upHeight = view.frame.origin.y + view.frame.size.height - (ScreenHeight - self.keyboardHeight) + 120;
     }
     
     if (movedUp) {

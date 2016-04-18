@@ -218,8 +218,6 @@
             controller.data = self.data[indexPath.row];
             [self.navigationController pushViewController:controller animated:YES];
         }
-
-        
     }
     
 }
