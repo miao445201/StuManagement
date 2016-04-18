@@ -119,7 +119,7 @@
         make.centerX.equalTo(view2.centerX).multipliedBy(0.5);
         make.top.equalTo(2*gap);
         make.width.equalTo(activity.height);
-        make.bottom.equalTo(-5*gap);
+        make.bottom.equalTo(-4*gap);
     }];
     [image111 makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(activity);
