@@ -104,7 +104,7 @@
     view2.backgroundColor = [UIColor whiteColor];
     [scrollView addSubview:view2];
     [view2 makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(view1.bottom).offset(2*gap);
+        make.top.equalTo(view1.bottom).offset(1.2*gap);
         make.left.right.equalTo(0);
         make.height.equalTo(ScreenWidth/1.9);
     }];
