@@ -19,6 +19,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        //IOS8
+        //创建UIUserNotificationSettings，并设置消息的显示类类型
+        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+        
+        [application registerUserNotificationSettings:notiSettings];
+        [application registerForRemoteNotifications];
+        
+    } else{ // ios7
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge                                       |UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//设置窗口
     self.window.backgroundColor = [UIColor whiteColor];
 
@@ -29,6 +43,26 @@
     [self.window makeKeyAndVisible];//显示
     return YES;
 
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)pToken{
+    NSLog(@"---Token--%@", pToken);
+    //需要调用接口与后台交互
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
+    NSLog(@"userInfo == %@",userInfo);
+    NSString *message = [[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    
+    [alert show];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    
+    NSLog(@"Regist fail%@",error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
