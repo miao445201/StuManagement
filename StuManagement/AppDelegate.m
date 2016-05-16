@@ -55,7 +55,7 @@
     NSLog(@"userInfo == %@",userInfo);
     NSString *message = [[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
     
     [alert show];
 }

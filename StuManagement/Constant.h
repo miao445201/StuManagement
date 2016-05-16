@@ -10,6 +10,7 @@
 #define kAppAppleId         @"980883989"
 #define kAppRateUrl         @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@"
 #define kAppDownloadUrl     @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=%@&mt=8"
+#define kNetWorkBaseUrl     @"http://115.159.206.142"
 
 //Constant Values
 #define kMaxCacheSize       1000*1024*1024

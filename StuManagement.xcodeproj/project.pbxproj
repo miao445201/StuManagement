@@ -40,6 +40,8 @@
 		9116D2CC1C9D0AAF00D80A50 /* icon_header_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C61C9D0AAF00D80A50 /* icon_header_back@3x.png */; };
 		9116D2CD1C9D0AAF00D80A50 /* line_hon_1px_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C71C9D0AAF00D80A50 /* line_hon_1px_up.png */; };
 		9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9116D2C81C9D0AAF00D80A50 /* line_ver_1px_right.png */; };
+		914F967F1CE9804C0050CA5A /* applogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 914F967E1CE9804C0050CA5A /* applogo.png */; };
+		914F96821CE9834A0050CA5A /* HSNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 914F96811CE9834A0050CA5A /* HSNetWork.m */; };
 		91EAA4A71C9D06A400DE1307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91EAA4A61C9D06A400DE1307 /* main.m */; };
 		91EAA4AA1C9D06A400DE1307 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91EAA4A91C9D06A400DE1307 /* AppDelegate.m */; };
 		91EAA4B21C9D06A400DE1307 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91EAA4B11C9D06A400DE1307 /* Assets.xcassets */; };
@@ -102,6 +104,9 @@
 		9116D2C61C9D0AAF00D80A50 /* icon_header_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_header_back@3x.png"; sourceTree = "<group>"; };
 		9116D2C71C9D0AAF00D80A50 /* line_hon_1px_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_hon_1px_up.png; sourceTree = "<group>"; };
 		9116D2C81C9D0AAF00D80A50 /* line_ver_1px_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_ver_1px_right.png; sourceTree = "<group>"; };
+		914F967E1CE9804C0050CA5A /* applogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = applogo.png; sourceTree = "<group>"; };
+		914F96801CE9834A0050CA5A /* HSNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSNetWork.h; sourceTree = "<group>"; };
+		914F96811CE9834A0050CA5A /* HSNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSNetWork.m; sourceTree = "<group>"; };
 		91EAA4A21C9D06A400DE1307 /* StuManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StuManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91EAA4A61C9D06A400DE1307 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		91EAA4A81C9D06A400DE1307 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -206,6 +211,8 @@
 		6DC4B4C01CA3D305006FB4EC /* 类 */ = {
 			isa = PBXGroup;
 			children = (
+				914F96801CE9834A0050CA5A /* HSNetWork.h */,
+				914F96811CE9834A0050CA5A /* HSNetWork.m */,
 				6DC4B4C11CA3D363006FB4EC /* ImageRollScrollView.h */,
 				6DC4B4C21CA3D363006FB4EC /* ImageRollScrollView.m */,
 				6D29C39A1CA5224A0031B908 /* MIYTableView.h */,
@@ -246,6 +253,7 @@
 		9116D2B31C9D07E600D80A50 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				914F967E1CE9804C0050CA5A /* applogo.png */,
 				6DCD705C1CBD27DB0044C95E /* denglu111.jpg */,
 				9116D2C31C9D0AAF00D80A50 /* Button_circle_checked_32px.png */,
 				9116D2C41C9D0AAF00D80A50 /* Circle_32px.png */,
@@ -418,6 +426,7 @@
 				6DC63BA71CA81C9F00F467A4 /* error.png in Resources */,
 				6D1A967C1CB79E8B00FCFF2A /* testXib.xib in Resources */,
 				91EAA4B51C9D06A400DE1307 /* LaunchScreen.storyboard in Resources */,
+				914F967F1CE9804C0050CA5A /* applogo.png in Resources */,
 				9116D2CE1C9D0AAF00D80A50 /* line_ver_1px_right.png in Resources */,
 				91EAA4B21C9D06A400DE1307 /* Assets.xcassets in Resources */,
 				9116D2CC1C9D0AAF00D80A50 /* icon_header_back@3x.png in Resources */,
@@ -501,6 +510,7 @@
 				6DC4B4C31CA3D363006FB4EC /* ImageRollScrollView.m in Sources */,
 				6D29C3A21CA52D140031B908 /* MIYTableViewController.m in Sources */,
 				6D1A967A1CB7942600FCFF2A /* ActivityDetailViewController.m in Sources */,
+				914F96821CE9834A0050CA5A /* HSNetWork.m in Sources */,
 				6D29C3901CA511740031B908 /* SpotlightViewController.m in Sources */,
 				6D29C38D1CA510DC0031B908 /* ActivityViewController.m in Sources */,
 				9116D2C11C9D0A3D00D80A50 /* RootViewController.m in Sources */,

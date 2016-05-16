@@ -47,7 +47,7 @@
     
     //logo
     UIImageView *logoImage = [[UIImageView alloc] init];
-    logoImage.backgroundColor = [UIColor colorWithRed:249/255.0 green:75/255.0 blue:58/255.0 alpha:0.9];
+    logoImage.image = [UIImage imageNamed:@"applogo.png"];
     [self.view addSubview:logoImage];
     [logoImage makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(69);

@@ -7,6 +7,7 @@
 //
 
 #import "ActivityDetailViewController.h"
+#import "HSNetWork.h"
 
 const NSInteger maxNumberOfWords = 150;
 
@@ -456,7 +457,14 @@ const NSInteger maxNumberOfWords = 150;
         sender.selected = YES;
         [sender setTitle:@"已签" forState:UIControlStateNormal];
         [self showHUDwithMessage:@"签到成功" imageName:@"success.png"];
+        //做请求来接受推送
+        [[HSNetWork shareManager]requestWithMethod:GET WithPath:@"/simplepush.php" WithParams:nil WithSuccessBlock:^(NSDictionary *dict) {
+            NSLog(@"%@",dict);
+        } WithFailureBlock:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
     }
+    
 }
 
 //- (void)clickZhanKai:(UIButton *)sender
